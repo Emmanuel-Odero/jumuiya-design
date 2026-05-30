@@ -2438,9 +2438,16 @@
                             <div class="f-grp"><label for="fFide">FIDE ID <span
                                         style="color:var(--slate);font-weight:400">(optional)</span></label><input
                                     type="text" id="fFide" placeholder="e.g. 10800000"></div>
-                            <!-- <div class="f-grp"><label for="fRating">National Rating <span
-                                        style="color:var(--slate);font-weight:400">(optional)</span></label><input
-                                    type="text" id="fRating" placeholder="e.g. 1850"></div> -->
+                            <div class="f-grp"><label for="fSec">Section/Category<span class="req">*</span></label><select id="fSec">
+                                    <option value="">Select Section</option>
+                                    <option value="open">Open</option>
+                                    <option value="u18">Under 18</option>
+                                    <option value="u14">Under 14</option>
+                                    <option value="u10">Under 10</option>
+                                    <option value="ladies">Ladies</option>
+                                </select>
+                                <div class="f-err" id="fSecErr">Please select a section.</div>
+                            </div>
                         </div>
                         <div class="f-row">
                             <div class="f-grp"><label for="fFed">Federation <span class="req">*</span></label><select
@@ -2456,7 +2463,7 @@
                             <div class="f-grp"><label for="fClub">Club / Organisation</label><input type="text"
                                     id="fClub" placeholder="e.g. Nairobi Chess Club"></div>
                         </div>
-                        <div class="fsect">Event Selection</div>
+                        <!-- <div class="fsect">Event Selection</div>
                         <div class="f-row">
                             <div class="f-grp"><label for="fTour">Tournament <span class="req">*</span></label><select
                                     id="fTour">
@@ -2468,7 +2475,7 @@
                                 </select>
                                 <div class="f-err" id="fTourErr">Please select a tournament.</div>
                             </div>
-                            <div class="f-grp"><label for="fSec">Section <span class="req">*</span></label><select
+                            <div class="f-grp"><label for="fSec">Section/Category<span class="req">*</span></label><select
                                     id="fSec">
                                     <option value="">Select Section</option>
                                     <option value="open">Open</option>
@@ -2479,7 +2486,7 @@
                                 </select>
                                 <div class="f-err" id="fSecErr">Please select a section.</div>
                             </div>
-                        </div>
+                        </div> -->
                         <div class="fsect">Payment</div>
                         <div class="f-grp"><label for="fPay">Payment Method <span class="req">*</span></label><select
                                 id="fPay">
