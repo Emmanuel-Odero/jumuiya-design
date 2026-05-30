@@ -1,2514 +1,1082 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jumuiya Chess — Where Community Meets the Board</title>
-    <meta name="description"
-        content="Jumuiya Chess — Kenya's premier chess community organisation. Tournaments, training, and a thriving community of minds. Join the movement.">
-    <style>
-        :root {
-            --clr-deep: #0f1f1b;
-            --clr-forest: #1b3a32;
-            --clr-forest-light: #245a4a;
-            --clr-gold: #c9a84c;
-            --clr-gold-light: #e6d088;
-            --clr-gold-pale: #f7f0d9;
-            --clr-cream: #fcfaf6;
-            --clr-white: #ffffff;
-            --clr-gray-50: #f9fafb;
-            --clr-gray-100: #f3f4f6;
-            --clr-gray-200: #e5e7eb;
-            --clr-gray-300: #d1d5db;
-            --clr-gray-400: #9ca3af;
-            --clr-gray-500: #6b7280;
-            --clr-gray-600: #4b5563;
-            --clr-gray-700: #374151;
-            --clr-gray-800: #1f2937;
-            --clr-gray-900: #111827;
-            --clr-red: #dc3545;
-            --clr-red-light: #fef2f2;
-            --clr-green-success: #10b981;
-            --clr-green-bg: #ecfdf5;
-            --font-heading: 'Georgia', 'Times New Roman', 'Cormorant Garamond', serif;
-            --font-body: 'Inter', 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
-            --font-mono: 'SF Mono', 'Fira Code', 'Consolas', monospace;
-            --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
-            --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.07), 0 2px 4px rgba(0, 0, 0, 0.04);
-            --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.10), 0 4px 10px rgba(0, 0, 0, 0.06);
-            --shadow-xl: 0 20px 50px rgba(0, 0, 0, 0.12), 0 8px 20px rgba(0, 0, 0, 0.06);
-            --radius-sm: 6px;
-            --radius-md: 10px;
-            --radius-lg: 16px;
-            --radius-xl: 20px;
-            --transition-fast: 0.18s ease;
-            --transition-smooth: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            --transition-bounce: 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-            --max-width: 1200px;
-            --nav-height: 72px;
-        }
-
-        *,
-        *::before,
-        *::after {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        html {
-            scroll-behavior: smooth;
-            scroll-padding-top: var(--nav-height);
-            font-size: 16px;
-        }
-
-        body {
-            font-family: var(--font-body);
-            background-color: var(--clr-cream);
-            color: var(--clr-gray-800);
-            line-height: 1.7;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-            overflow-x: hidden;
-        }
-
-        /* Typography */
-        h1,
-        h2,
-        h3,
-        h4,
-        h5,
-        h6 {
-            font-family: var(--font-heading);
-            font-weight: 700;
-            line-height: 1.2;
-            color: var(--clr-deep);
-            letter-spacing: -0.01em;
-        }
-
-        h1 {
-            font-size: clamp(2.4rem, 5vw, 3.8rem);
-        }
-
-        h2 {
-            font-size: clamp(1.8rem, 3.5vw, 2.6rem);
-        }
-
-        h3 {
-            font-size: clamp(1.2rem, 2vw, 1.5rem);
-        }
-
-        p {
-            margin-bottom: 1rem;
-            color: var(--clr-gray-600);
-        }
-
-        a {
-            color: var(--clr-forest);
-            text-decoration: none;
-            transition: color var(--transition-fast);
-        }
-
-        a:hover {
-            color: var(--clr-gold);
-        }
-
-        .container {
-            width: 100%;
-            max-width: var(--max-width);
-            margin: 0 auto;
-            padding: 0 1.5rem;
-        }
-
-        /* Buttons */
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
-            padding: 0.75rem 1.6rem;
-            font-family: var(--font-body);
-            font-size: 0.95rem;
-            font-weight: 600;
-            border-radius: var(--radius-sm);
-            cursor: pointer;
-            transition: all var(--transition-smooth);
-            border: 2px solid transparent;
-            text-decoration: none;
-            white-space: nowrap;
-            letter-spacing: 0.01em;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .btn--primary {
-            background: var(--clr-gold);
-            color: var(--clr-deep);
-            border-color: var(--clr-gold);
-            box-shadow: var(--shadow-sm);
-        }
-
-        .btn--primary:hover {
-            background: #b89435;
-            border-color: #b89435;
-            color: var(--clr-deep);
-            box-shadow: var(--shadow-md);
-            transform: translateY(-1px);
-        }
-
-        .btn--secondary {
-            background: transparent;
-            color: var(--clr-forest);
-            border-color: var(--clr-forest);
-        }
-
-        .btn--secondary:hover {
-            background: var(--clr-forest);
-            color: var(--clr-white);
-            transform: translateY(-1px);
-            box-shadow: var(--shadow-md);
-        }
-
-        .btn--outline-light {
-            background: transparent;
-            color: var(--clr-white);
-            border-color: rgba(255, 255, 255, 0.5);
-        }
-
-        .btn--outline-light:hover {
-            background: rgba(255, 255, 255, 0.1);
-            border-color: var(--clr-white);
-            color: var(--clr-white);
-        }
-
-        .btn--sm {
-            padding: 0.5rem 1.1rem;
-            font-size: 0.85rem;
-        }
-
-        .btn--lg {
-            padding: 0.9rem 2rem;
-            font-size: 1.05rem;
-            border-radius: var(--radius-md);
-        }
-
-        /* Navigation */
-        .nav {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 1000;
-            height: var(--nav-height);
-            background: rgba(15, 31, 27, 0.92);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-            transition: all var(--transition-smooth);
-        }
-
-        .nav.scrolled {
-            background: rgba(15, 31, 27, 0.97);
-            box-shadow: var(--shadow-lg);
-        }
-
-        .nav__inner {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            height: 100%;
-            max-width: var(--max-width);
-            margin: 0 auto;
-            padding: 0 1.5rem;
-        }
-
-        .nav__logo {
-            display: flex;
-            align-items: center;
-            gap: 0.6rem;
-            font-family: var(--font-heading);
-            font-size: 1.35rem;
-            font-weight: 700;
-            color: var(--clr-white);
-            letter-spacing: -0.02em;
-            text-decoration: none;
-            z-index: 1001;
-        }
-
-        .nav__logo-icon {
-            width: 40px;
-            height: 40px;
-            border-radius: var(--radius-sm);
-            background: var(--clr-gold);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            color: var(--clr-deep);
-            font-weight: 900;
-            flex-shrink: 0;
-        }
-
-        .nav__links {
-            display: flex;
-            align-items: center;
-            gap: 0.25rem;
-            list-style: none;
-        }
-
-        .nav__links a {
-            display: block;
-            padding: 0.5rem 1rem;
-            color: rgba(255, 255, 255, 0.8);
-            font-weight: 500;
-            font-size: 0.9rem;
-            border-radius: var(--radius-sm);
-            transition: all var(--transition-fast);
-        }
-
-        .nav__links a:hover,
-        .nav__links a.active {
-            color: var(--clr-white);
-            background: rgba(255, 255, 255, 0.08);
-        }
-
-        .nav__links a.nav-cta {
-            background: var(--clr-gold);
-            color: var(--clr-deep);
-            font-weight: 600;
-            padding: 0.55rem 1.2rem;
-        }
-
-        .nav__links a.nav-cta:hover {
-            background: #b89435;
-            color: var(--clr-deep);
-        }
-
-        .nav__hamburger {
-            display: none;
-            background: none;
-            border: none;
-            cursor: pointer;
-            padding: 0.5rem;
-            z-index: 1001;
-            flex-direction: column;
-            gap: 5px;
-        }
-
-        .nav__hamburger span {
-            display: block;
-            width: 26px;
-            height: 2.5px;
-            background: var(--clr-white);
-            border-radius: 3px;
-            transition: all var(--transition-smooth);
-        }
-
-        .nav__hamburger.active span:nth-child(1) {
-            transform: rotate(45deg) translate(5px, 5px);
-        }
-
-        .nav__hamburger.active span:nth-child(2) {
-            opacity: 0;
-        }
-
-        .nav__hamburger.active span:nth-child(3) {
-            transform: rotate(-45deg) translate(5px, -5px);
-        }
-
-        .nav__mobile-menu {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(15, 31, 27, 0.98);
-            backdrop-filter: blur(20px);
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
-            z-index: 1000;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity var(--transition-smooth);
-        }
-
-        .nav__mobile-menu.open {
-            opacity: 1;
-            pointer-events: all;
-        }
-
-        .nav__mobile-menu a {
-            font-size: 1.3rem;
-            color: var(--clr-white);
-            padding: 0.75rem 2rem;
-            font-weight: 500;
-        }
-
-        .nav__mobile-menu a:hover {
-            color: var(--clr-gold);
-        }
-
-        .nav__mobile-menu .nav-cta-mobile {
-            background: var(--clr-gold);
-            color: var(--clr-deep);
-            border-radius: var(--radius-md);
-            font-weight: 600;
-            padding: 0.8rem 2rem;
-        }
-
-        /* Hero Section */
-        .hero {
-            position: relative;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            background: linear-gradient(160deg, #0a1a15 0%, #0f1f1b 30%, #162f28 60%, #1b3a32 100%);
-            overflow: hidden;
-            padding-top: var(--nav-height);
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background-image: url('data:image/svg+xml;utf8,<svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="200" height="200" rx="16" fill="%231b3a32" /><g opacity="0.85"><rect x="0" y="0" width="50" height="50" fill="%23c9a84c" /><rect x="100" y="0" width="50" height="50" fill="%23c9a84c" /><rect x="50" y="50" width="50" height="50" fill="%23c9a84c" /><rect x="150" y="50" width="50" height="50" fill="%23c9a84c" /><rect x="0" y="100" width="50" height="50" fill="%23c9a84c" /><rect x="100" y="100" width="50" height="50" fill="%23c9a84c" /><rect x="50" y="150" width="50" height="50" fill="%23c9a84c" /><rect x="150" y="150" width="50" height="50" fill="%23c9a84c" /></g><g transform="translate(75, 50) scale(0.55)"><path d="M45 20 C45 8 35 0 25 0 C15 0 5 8 5 20 C5 28 10 35 15 38 L10 50 L40 50 L35 38 C40 35 45 28 45 20 Z" fill="%23f7f0d9" /><circle cx="25" cy="15" r="4" fill="%23c9a84c" /><path d="M10 50 L15 70 L35 70 L40 50 Z" fill="%23f7f0d9" /><rect x="12" y="70" width="26" height="8" rx="2" fill="%23f7f0d9" /></g><g transform="translate(125, 110) scale(0.5)"><circle cx="25" cy="15" r="12" fill="%23f7f0d9" /><path d="M13 25 L13 45 C13 50 17 55 25 55 C33 55 37 50 37 45 L37 25 Z" fill="%23f7f0d9" /><rect x="15" y="45" width="20" height="6" rx="2" fill="%23f7f0d9" /></g><circle cx="30" cy="30" r="6" fill="%23e6d088" opacity="0.3" /><circle cx="170" cy="170" r="8" fill="%23e6d088" opacity="0.2" /></svg>');
-            background-repeat: repeat;
-            background-size: 300px 300px;
-            opacity: 0.08;
-            pointer-events: none;
-            z-index: 1;
-        }
-
-        .hero__bg-pattern {
-            position: absolute;
-            inset: 0;
-            opacity: 0.04;
-            background-image: repeating-linear-gradient(0deg, transparent, transparent 39px, rgba(201, 168, 76, 0.5) 39px, rgba(201, 168, 76, 0.5) 40px),
-                repeating-linear-gradient(90deg, transparent, transparent 39px, rgba(201, 168, 76, 0.5) 39px, rgba(201, 168, 76, 0.5) 40px);
-            pointer-events: none;
-        }
-
-        .hero__piece-float {
-            position: absolute;
-            font-size: clamp(4rem, 12vw, 14rem);
-            opacity: 0.06;
-            pointer-events: none;
-            user-select: none;
-            animation: floatChess 20s ease-in-out infinite;
-        }
-
-        .hero__piece-float--1 {
-            top: 10%;
-            right: -2%;
-            animation-delay: 0s;
-            font-size: clamp(5rem, 15vw, 18rem);
-        }
-
-        .hero__piece-float--2 {
-            bottom: 5%;
-            left: -3%;
-            animation-delay: -7s;
-            font-size: clamp(3rem, 10vw, 12rem);
-            opacity: 0.04;
-        }
-
-        @keyframes floatChess {
-
-            0%,
-            100% {
-                transform: translateY(0) rotate(0deg);
-            }
-
-            25% {
-                transform: translateY(-30px) rotate(3deg);
-            }
-
-            50% {
-                transform: translateY(-15px) rotate(-2deg);
-            }
-
-            75% {
-                transform: translateY(-40px) rotate(1deg);
-            }
-        }
-
-        /* Hero grid layout */
-        .hero__grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 2.5rem;
-            align-items: center;
-            position: relative;
-            z-index: 2;
-            width: 100%;
-        }
-
-        .hero__text {
-            max-width: 650px;
-            position: relative;
-            z-index: 2;
-            /* ensure text stays above mobile background */
-        }
-
-        .hero__visual {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            position: relative;
-        }
-
-        .hero__visual-collage {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 1rem;
-        }
-
-        .hero__image {
-            width: 320px;
-            height: 320px;
-            border-radius: 12px;
-            object-fit: cover;
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6);
-            border: 6px solid var(--clr-gold);
-            transition: transform 0.3s ease;
-        }
-
-        .hero__image:hover {
-            transform: scale(1.05);
-        }
-
-        .hero__visual svg {
-            display: none;
-        }
-
-        .hero__eyebrow {
-            display: inline-block;
-            font-family: var(--font-body);
-            font-size: 0.85rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.12em;
-            color: var(--clr-gold);
-            margin-bottom: 1rem;
-            padding: 0.35rem 0.9rem;
-            border: 1px solid rgba(201, 168, 76, 0.35);
-            border-radius: 50px;
-            background: rgba(201, 168, 76, 0.06);
-        }
-
-        .hero__title {
-            color: var(--clr-white);
-            font-size: clamp(2.6rem, 5.5vw, 4.2rem);
-            margin-bottom: 1.2rem;
-            line-height: 1.1;
-        }
-
-        .hero__title span {
-            color: var(--clr-gold);
-        }
-
-        .hero__subtitle {
-            color: rgba(255, 255, 255, 0.7);
-            font-size: clamp(1rem, 1.8vw, 1.2rem);
-            margin-bottom: 2rem;
-            max-width: 550px;
-            line-height: 1.6;
-        }
-
-        .hero__actions {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1rem;
-        }
-
-        .hero__stats {
-            display: flex;
-            gap: 2.5rem;
-            margin-top: 3rem;
-            padding-top: 2rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        /* Mobile: visual elements become background */
-        @media (max-width: 768px) {
-            .hero__grid {
-                grid-template-columns: 1fr;
-                gap: 0;
-            }
-
-            .hero__visual {
-                position: absolute;
-                inset: 0;
-                z-index: 1;
-                pointer-events: none;
-            }
-
-            .hero__visual::after {
-                content: '';
-                position: absolute;
-                inset: 0;
-                background: rgba(10, 26, 21, 0.65);
-                /* dark overlay for readability */
-                z-index: 2;
-            }
-
-            .hero__visual-collage {
-                width: 100%;
-                height: 100%;
-                position: relative;
-                display: block;
-            }
-
-            .hero__image {
-                position: absolute;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-                width: 100%;
-                height: 100%;
-                border-radius: 0;
-                object-fit: cover;
-                opacity: 0.25;
-                border: none;
-                box-shadow: none;
-            }
-
-            .hero__visual svg {
-                display: none;
-            }
-
-            .hero__text {
-                z-index: 3;
-                padding: 2rem 0;
-            }
-
-            .hero__stats {
-                flex-wrap: wrap;
-                gap: 1.5rem;
-            }
-        }
-
-        /* Trusted Section */
-        .trusted-section {
-            background: var(--clr-gray-50);
-            padding: 4rem 0;
-            border-top: 1px solid var(--clr-gray-200);
-            border-bottom: 1px solid var(--clr-gray-200);
-        }
-
-        .trusted-container {
-            display: grid;
-            grid-template-columns: auto 1fr;
-            gap: 3rem;
-            align-items: center;
-            max-width: var(--max-width);
-            margin: 0 auto;
-            padding: 0 1.5rem;
-        }
-
-        .trusted-heading {
-            font-family: var(--font-heading);
-            font-size: clamp(1.8rem, 3vw, 2.2rem);
-            font-weight: 700;
-            color: var(--clr-deep);
-            line-height: 1.2;
-            max-width: 200px;
-        }
-
-        .trusted-stats {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 2rem;
-        }
-
-        .trusted-stat {
-            display: flex;
-            flex-direction: column;
-            gap: 0.3rem;
-        }
-
-        .trusted-stat__number {
-            font-family: var(--font-heading);
-            font-size: clamp(1.8rem, 2.5vw, 2.4rem);
-            font-weight: 700;
-            color: var(--clr-forest);
-            line-height: 1;
-        }
-
-        .trusted-stat__label {
-            font-size: 0.85rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
-            color: var(--clr-gray-600);
-        }
-
-        .trusted-form {
-            background: var(--clr-white);
-            border-radius: var(--radius-lg);
-            padding: 2rem;
-            border: 1px solid var(--clr-gray-200);
-            box-shadow: var(--shadow-md);
-        }
-
-        .trusted-form__label {
-            display: block;
-            font-size: 0.9rem;
-            font-weight: 600;
-            color: var(--clr-gray-700);
-            margin-bottom: 0.8rem;
-        }
-
-        .trusted-form__tabs {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 0;
-            margin-bottom: 1.2rem;
-            border-bottom: 2px solid var(--clr-gray-200);
-        }
-
-        .trusted-form__tab {
-            padding: 0.8rem 1rem;
-            text-align: center;
-            font-weight: 600;
-            font-size: 0.9rem;
-            color: var(--clr-gray-600);
-            cursor: pointer;
-            border: none;
-            background: none;
-            border-bottom: 3px solid transparent;
-            transition: all var(--transition-fast);
-            position: relative;
-            bottom: -2px;
-        }
-
-        .trusted-form__tab:hover {
-            color: var(--clr-forest);
-        }
-
-        .trusted-form__tab.active {
-            color: var(--clr-forest);
-            border-bottom-color: var(--clr-forest);
-        }
-
-        .trusted-form__input {
-            width: 100%;
-            padding: 0.7rem 0.9rem;
-            border: 1.5px solid var(--clr-gray-200);
-            border-radius: var(--radius-sm);
-            font-family: var(--font-body);
-            font-size: 0.9rem;
-            background: var(--clr-gray-50);
-            transition: all var(--transition-fast);
-            margin-bottom: 1rem;
-        }
-
-        .trusted-form__input:focus {
-            outline: none;
-            border-color: var(--clr-forest);
-            background: var(--clr-white);
-            box-shadow: 0 0 0 3px rgba(27, 58, 50, 0.1);
-        }
-
-        .trusted-form__error {
-            display: flex;
-            align-items: center;
-            gap: 0.4rem;
-            font-size: 0.8rem;
-            color: var(--clr-red);
-            margin-bottom: 0.8rem;
-        }
-
-        .trusted-form__error-icon {
-            font-size: 1rem;
-        }
-
-        .trusted-form__button {
-            background: var(--clr-forest);
-            color: var(--clr-white);
-            border: none;
-            padding: 0.75rem 1.8rem;
-            border-radius: var(--radius-md);
-            font-weight: 600;
-            font-size: 0.95rem;
-            cursor: pointer;
-            transition: all var(--transition-smooth);
-            align-self: flex-end;
-        }
-
-        .trusted-form__button:hover {
-            background: var(--clr-forest-light);
-            transform: translateY(-1px);
-            box-shadow: var(--shadow-md);
-        }
-
-        .trusted-form__actions {
-            display: flex;
-            justify-content: flex-end;
-            gap: 1rem;
-        }
-
-        @media (max-width: 768px) {
-            .trusted-container {
-                grid-template-columns: 1fr;
-                gap: 2rem;
-            }
-
-            .trusted-heading {
-                max-width: none;
-                text-align: center;
-            }
-
-            .trusted-stats {
-                grid-template-columns: repeat(3, 1fr);
-                gap: 1.5rem;
-            }
-
-            .trusted-form {
-                padding: 1.5rem;
-            }
-
-            .trusted-form__tabs {
-                grid-template-columns: 1fr 1fr;
-            }
-
-            .trusted-form__tab {
-                padding: 0.6rem 0.8rem;
-                font-size: 0.85rem;
-            }
-        }
-
-        /* Ways to Get Involved Section */
-        .ways-section {
-            background: var(--clr-cream);
-            padding: 6rem 0;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .ways-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(201, 168, 76, 0.3), transparent);
-            pointer-events: none;
-        }
-
-        .ways-header {
-            margin-bottom: 5rem;
-            position: relative;
-            z-index: 1;
-        }
-
-        .ways-header__title {
-            font-family: var(--font-heading);
-            font-size: clamp(2.2rem, 5vw, 3.2rem);
-            font-weight: 700;
-            color: var(--clr-deep);
-            margin-bottom: 1rem;
-            letter-spacing: -0.02em;
-            line-height: 1.1;
-        }
-
-        .ways-header__subtitle {
-            color: var(--clr-gray-600);
-            font-size: 1.1rem;
-            max-width: 700px;
-            line-height: 1.7;
-            font-weight: 400;
-        }
-
-        .ways-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 1.8rem;
-            position: relative;
-            z-index: 1;
-            auto-rows: auto;
-            grid-auto-flow: dense;
-        }
-
-        .ways-card {
-            background: var(--clr-white);
-            border-radius: 24px;
-            overflow: hidden;
-            transition: all var(--transition-smooth);
-            border: none;
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            height: 100%;
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
-            cursor: pointer;
-        }
-
-        .ways-card:nth-child(1) {
-            grid-column: span 2;
-            grid-row: span 2;
-        }
-
-        .ways-card:nth-child(2) {
-            grid-column: span 2;
-        }
-
-        .ways-card:nth-child(3) {
-            grid-column: span 2;
-            grid-row: span 2;
-        }
-
-        .ways-card:nth-child(4) {
-            grid-column: span 2;
-        }
-
-        .ways-card:hover {
-            transform: translateY(-16px);
-            box-shadow: 0 24px 48px rgba(0, 0, 0, 0.18);
-        }
-
-        .ways-card__visual {
-            width: 100%;
-            background-size: cover;
-            background-position: center;
-            position: relative;
-            overflow: hidden;
-            flex-grow: 1;
-            min-height: 300px;
-            display: flex;
-            align-items: flex-end;
-            justify-content: flex-start;
-        }
-
-        .ways-card:nth-child(1) .ways-card__visual {
-            min-height: 100%;
-        }
-
-        .ways-card:nth-child(3) .ways-card__visual {
-            min-height: 100%;
-        }
-
-        .ways-card__visual::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.5) 100%);
-            z-index: 1;
-        }
-
-        .ways-card__content {
-            padding: 2rem;
-            flex-grow: 0;
-            display: flex;
-            flex-direction: column;
-            gap: 0.8rem;
-            position: relative;
-            z-index: 2;
-            background: var(--clr-white);
-        }
-
-        .ways-card:nth-child(1) .ways-card__content,
-        .ways-card:nth-child(3) .ways-card__content {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.98) 40%);
-            padding: 3rem 2rem 2rem;
-        }
-
-        .ways-card__header {
-            margin-bottom: 0.3rem;
-        }
-
-        .ways-card__title {
-            font-family: var(--font-heading);
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--clr-deep);
-            margin-bottom: 0.2rem;
-            letter-spacing: -0.01em;
-            line-height: 1.2;
-        }
-
-        .ways-card:nth-child(2) .ways-card__title,
-        .ways-card:nth-child(4) .ways-card__title {
-            font-size: 1.3rem;
-        }
-
-        .ways-card__subtitle {
-            font-size: 0.85rem;
-            color: var(--clr-gray-500);
-            font-weight: 500;
-            line-height: 1.4;
-        }
-
-        .ways-card__list {
-            list-style: none;
-            display: flex;
-            flex-direction: column;
-            gap: 0.6rem;
-            margin: 0.3rem 0;
-        }
-
-        .ways-card:nth-child(1) .ways-card__list,
-        .ways-card:nth-child(3) .ways-card__list {
-            display: none;
-        }
-
-        .ways-card__list-item {
-            display: flex;
-            align-items: flex-start;
-            gap: 0.6rem;
-            font-size: 0.8rem;
-            color: var(--clr-gray-600);
-            line-height: 1.4;
-        }
-
-        .ways-card__list-item::before {
-            content: '';
-            flex-shrink: 0;
-            width: 5px;
-            height: 5px;
-            border-radius: 50%;
-            background: var(--clr-gold);
-            margin-top: 4px;
-        }
-
-        .ways-card__cta {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.6rem;
-            color: var(--clr-forest);
-            font-weight: 600;
-            font-size: 0.85rem;
-            transition: all var(--transition-fast);
-            text-decoration: none;
-            padding: 0.5rem 0;
-            border-bottom: 2px solid transparent;
-            width: fit-content;
-            margin-top: 0.3rem;
-        }
-
-        .ways-card__cta:hover {
-            color: var(--clr-gold);
-            border-bottom-color: var(--clr-gold);
-            transform: translateX(4px);
-        }
-
-        .ways-card__cta-icon {
-            font-size: 0.9rem;
-            transition: transform var(--transition-fast);
-        }
-
-        .ways-card__cta:hover .ways-card__cta-icon {
-            transform: translateX(3px);
-        }
-
-        @media (max-width: 1200px) {
-            .ways-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 1.5rem;
-            }
-
-            .ways-card:nth-child(1) {
-                grid-column: span 1;
-                grid-row: span 1;
-            }
-
-            .ways-card:nth-child(2) {
-                grid-column: span 1;
-            }
-
-            .ways-card:nth-child(3) {
-                grid-column: span 1;
-                grid-row: span 1;
-            }
-
-            .ways-card:nth-child(4) {
-                grid-column: span 1;
-            }
-
-            .ways-card__visual {
-                min-height: 250px;
-            }
-
-            .ways-card:nth-child(1) .ways-card__visual,
-            .ways-card:nth-child(3) .ways-card__visual {
-                min-height: 250px;
-            }
-
-            .ways-card:nth-child(1) .ways-card__list,
-            .ways-card:nth-child(3) .ways-card__list {
-                display: flex;
-            }
-
-            .ways-card:nth-child(1) .ways-card__content,
-            .ways-card:nth-child(3) .ways-card__content {
-                position: relative;
-                background: var(--clr-white);
-                padding: 2rem;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .ways-section {
-                padding: 4rem 0;
-            }
-
-            .ways-grid {
-                grid-template-columns: 1fr;
-                gap: 1.5rem;
-            }
-
-            .ways-card:nth-child(1),
-            .ways-card:nth-child(2),
-            .ways-card:nth-child(3),
-            .ways-card:nth-child(4) {
-                grid-column: span 1;
-                grid-row: span 1;
-            }
-
-            .ways-card__visual {
-                min-height: 200px;
-            }
-
-            .ways-card:nth-child(1) .ways-card__visual,
-            .ways-card:nth-child(3) .ways-card__visual {
-                min-height: 200px;
-            }
-
-            .ways-card:nth-child(1) .ways-card__content,
-            .ways-card:nth-child(3) .ways-card__content {
-                position: relative;
-                background: var(--clr-white);
-                padding: 1.5rem;
-            }
-
-            .ways-card:nth-child(1) .ways-card__list,
-            .ways-card:nth-child(3) .ways-card__list {
-                display: flex;
-            }
-
-            .ways-card__content {
-                padding: 1.5rem;
-            }
-
-            .ways-card__title {
-                font-size: 1.2rem;
-            }
-
-            .ways-card__list {
-                gap: 0.5rem;
-            }
-
-            .ways-card__list-item {
-                font-size: 0.75rem;
-            }
-        }
-
-        /* Sections */
-        .section {
-            padding: 5rem 0;
-        }
-
-        .section--alt {
-            background: var(--clr-white);
-        }
-
-        .section__header {
-            text-align: center;
-            margin-bottom: 3rem;
-        }
-
-        .section__header h2 {
-            margin-bottom: 0.5rem;
-        }
-
-        .section__header p {
-            max-width: 600px;
-            margin: 0 auto;
-            color: var(--clr-gray-500);
-            font-size: 1.05rem;
-        }
-
-        .section__divider {
-            width: 50px;
-            height: 4px;
-            background: var(--clr-gold);
-            border-radius: 2px;
-            margin: 1rem auto;
-        }
-
-        /* About */
-        .about-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
-            align-items: center;
-        }
-
-        .about__visual {
-            position: relative;
-            background: var(--clr-deep);
-            border-radius: var(--radius-xl);
-            padding: 2.5rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            min-height: 380px;
-            overflow: hidden;
-        }
-
-        .about__visual-inner {
-            text-align: center;
-            position: relative;
-            z-index: 1;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .about__visual svg {
-            width: 180px;
-            height: auto;
-            filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.4));
-        }
-
-        .about__visual-label {
-            color: var(--clr-gold);
-            font-family: var(--font-heading);
-            font-size: 1.4rem;
-            font-weight: 700;
-        }
-
-        .about__visual-bg {
-            position: absolute;
-            inset: 0;
-            opacity: 0.05;
-            background: repeating-conic-gradient(rgba(201, 168, 76, 0.3) 0% 25%, transparent 0% 50%) 50% / 60px 60px;
-        }
-
-        .about__text h3 {
-            margin-bottom: 0.8rem;
-        }
-
-        .about__features {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1rem;
-            margin-top: 1.5rem;
-        }
-
-        .about__feature {
-            display: flex;
-            align-items: flex-start;
-            gap: 0.6rem;
-        }
-
-        .about__feature-icon {
-            flex-shrink: 0;
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            background: var(--clr-gold-pale);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1rem;
-        }
-
-        .about__feature-text {
-            font-size: 0.9rem;
-            color: var(--clr-gray-600);
-            line-height: 1.4;
-        }
-
-        .about__feature-text strong {
-            display: block;
-            color: var(--clr-deep);
-            font-weight: 600;
-        }
-
-        /* Tournaments */
-        .tournament-tabs {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-            justify-content: center;
-            margin-bottom: 2rem;
-        }
-
-        .tournament-tab {
-            padding: 0.6rem 1.3rem;
-            border-radius: 50px;
-            font-size: 0.9rem;
-            font-weight: 500;
-            cursor: pointer;
-            border: 2px solid var(--clr-gray-200);
-            background: var(--clr-white);
-            color: var(--clr-gray-600);
-            transition: all var(--transition-fast);
-            font-family: var(--font-body);
-        }
-
-        .tournament-tab:hover {
-            border-color: var(--clr-gold);
-            color: var(--clr-deep);
-        }
-
-        .tournament-tab.active {
-            background: var(--clr-deep);
-            color: var(--clr-white);
-            border-color: var(--clr-deep);
-        }
-
-        .tournament-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-            gap: 1.5rem;
-        }
-
-        .tournament-card {
-            background: var(--clr-white);
-            border-radius: var(--radius-lg);
-            border: 1px solid var(--clr-gray-200);
-            overflow: hidden;
-            transition: all var(--transition-smooth);
-            display: flex;
-            flex-direction: column;
-        }
-
-        .tournament-card:hover {
-            box-shadow: var(--shadow-xl);
-            transform: translateY(-3px);
-            border-color: var(--clr-gold);
-        }
-
-        .tournament-card__header {
-            padding: 1.5rem 1.5rem 0.8rem;
-            border-bottom: 1px solid var(--clr-gray-100);
-        }
-
-        .tournament-card__badge {
-            display: inline-block;
-            font-size: 0.7rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.06em;
-            padding: 0.3rem 0.7rem;
-            border-radius: 50px;
-            margin-bottom: 0.6rem;
-        }
-
-        .badge--open {
-            background: var(--clr-green-bg);
-            color: var(--clr-green-success);
-        }
-
-        .badge--soon {
-            background: #fffbeb;
-            color: #d97706;
-        }
-
-        .badge--closed {
-            background: var(--clr-red-light);
-            color: var(--clr-red);
-        }
-
-        .tournament-card__title {
-            font-size: 1.2rem;
-            margin-bottom: 0.25rem;
-        }
-
-        .tournament-card__format {
-            font-size: 0.85rem;
-            color: var(--clr-gray-500);
-        }
-
-        .tournament-card__body {
-            padding: 1rem 1.5rem;
-            flex-grow: 1;
-        }
-
-        .tournament-card__detail {
-            display: flex;
-            align-items: center;
-            gap: 0.6rem;
-            font-size: 0.88rem;
-            color: var(--clr-gray-600);
-            margin-bottom: 0.5rem;
-        }
-
-        .tournament-card__detail-icon {
-            width: 20px;
-            text-align: center;
-            flex-shrink: 0;
-            color: var(--clr-gold);
-        }
-
-        .tournament-card__footer {
-            padding: 1rem 1.5rem 1.5rem;
-            display: flex;
-            gap: 0.75rem;
-            flex-wrap: wrap;
-        }
-
-        /* Registration */
-        .registration-layout {
-            display: grid;
-            grid-template-columns: 1fr 1.2fr;
-            gap: 2.5rem;
-            align-items: start;
-        }
-
-        .registration-info {
-            background: var(--clr-deep);
-            color: var(--clr-white);
-            border-radius: var(--radius-xl);
-            padding: 2.5rem;
-            position: sticky;
-            top: calc(var(--nav-height) + 2rem);
-        }
-
-        .registration-info h3 {
-            color: var(--clr-white);
-            margin-bottom: 1rem;
-        }
-
-        .registration-info__list {
-            list-style: none;
-            display: flex;
-            flex-direction: column;
-            gap: 0.8rem;
-        }
-
-        .registration-info__list li {
-            display: flex;
-            align-items: flex-start;
-            gap: 0.7rem;
-            font-size: 0.9rem;
-            color: rgba(255, 255, 255, 0.75);
-        }
-
-        .registration-info__list li::before {
-            content: '✓';
-            flex-shrink: 0;
-            color: var(--clr-gold);
-            font-weight: 700;
-            font-size: 1rem;
-        }
-
-        .registration-info__note {
-            margin-top: 1.5rem;
-            padding-top: 1.5rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.15);
-            font-size: 0.8rem;
-            color: rgba(255, 255, 255, 0.5);
-        }
-
-        .form-card {
-            background: var(--clr-white);
-            border-radius: var(--radius-xl);
-            padding: 2.5rem;
-            border: 1px solid var(--clr-gray-200);
-            box-shadow: var(--shadow-lg);
-        }
-
-        .form-group {
-            margin-bottom: 1.2rem;
-        }
-
-        .form-group label {
-            display: block;
-            font-weight: 600;
-            font-size: 0.85rem;
-            color: var(--clr-gray-700);
-            margin-bottom: 0.35rem;
-        }
-
-        .form-group .required {
-            color: var(--clr-red);
-            margin-left: 2px;
-        }
-
-        .form-group input,
-        .form-group select,
-        .form-group textarea {
-            width: 100%;
-            padding: 0.7rem 0.9rem;
-            border: 1.5px solid var(--clr-gray-200);
-            border-radius: var(--radius-sm);
-            font-family: var(--font-body);
-            font-size: 0.95rem;
-            background: var(--clr-gray-50);
-            transition: all var(--transition-fast);
-        }
-
-        .form-group input:focus,
-        .form-group select:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: var(--clr-gold);
-            box-shadow: 0 0 0 3px rgba(201, 168, 76, 0.12);
-            background: var(--clr-white);
-        }
-
-        .form-group input.error,
-        .form-group select.error {
-            border-color: var(--clr-red);
-        }
-
-        .error-msg {
-            color: var(--clr-red);
-            font-size: 0.78rem;
-            margin-top: 0.3rem;
-            display: none;
-        }
-
-        .error-msg.visible {
-            display: block;
-        }
-
-        .form-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1rem;
-        }
-
-        .form-checkbox {
-            display: flex;
-            align-items: flex-start;
-            gap: 0.6rem;
-            margin-top: 0.5rem;
-        }
-
-        .form-submit-row {
-            margin-top: 1.8rem;
-            display: flex;
-            gap: 1rem;
-            align-items: center;
-            flex-wrap: wrap;
-        }
-
-        .form-success {
-            display: none;
-            text-align: center;
-            padding: 2rem;
-        }
-
-        .form-success.visible {
-            display: block;
-        }
-
-        /* News */
-        .news-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 1.5rem;
-        }
-
-        .news-card {
-            background: var(--clr-white);
-            border-radius: var(--radius-lg);
-            border: 1px solid var(--clr-gray-200);
-            overflow: hidden;
-            transition: all var(--transition-smooth);
-            display: flex;
-            flex-direction: column;
-        }
-
-        .news-card:hover {
-            box-shadow: var(--shadow-xl);
-            transform: translateY(-3px);
-        }
-
-        .news-card__image {
-            height: 200px;
-            background: var(--clr-forest);
-            position: relative;
-            overflow: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .news-card__image-placeholder {
-            font-size: 5rem;
-            opacity: 0.3;
-            color: var(--clr-gold-light);
-        }
-
-        .news-card__image-overlay {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            padding: 0.6rem 1rem;
-            background: linear-gradient(transparent, rgba(0, 0, 0, 0.6));
-        }
-
-        .news-card__date {
-            font-size: 0.75rem;
-            color: rgba(255, 255, 255, 0.9);
-        }
-
-        .news-card__body {
-            padding: 1.3rem 1.5rem;
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .news-card__tag {
-            font-size: 0.7rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.06em;
-            color: var(--clr-gold);
-            margin-bottom: 0.4rem;
-        }
-
-        .news-card__title {
-            font-size: 1.1rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .news-card__excerpt {
-            font-size: 0.88rem;
-            color: var(--clr-gray-500);
-            flex-grow: 1;
-        }
-
-        .news-card__link {
-            display: inline-block;
-            margin-top: 0.8rem;
-            font-weight: 600;
-            font-size: 0.85rem;
-        }
-
-        /* CTA */
-        .cta-banner {
-            background: linear-gradient(135deg, var(--clr-forest) 0%, var(--clr-deep) 100%);
-            border-radius: var(--radius-xl);
-            padding: 3.5rem 3rem;
-            text-align: center;
-            color: var(--clr-white);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .cta-banner::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: repeating-conic-gradient(rgba(255, 255, 255, 0.02) 0% 25%, transparent 0% 50%) 50% / 40px 40px;
-            pointer-events: none;
-        }
-
-        .cta-banner h2 {
-            color: var(--clr-white);
-            margin-bottom: 0.8rem;
-        }
-
-        .cta-banner p {
-            color: rgba(255, 255, 255, 0.7);
-            margin-bottom: 1.8rem;
-            max-width: 550px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        /* Footer */
-        .footer {
-            background: var(--clr-deep);
-            color: rgba(255, 255, 255, 0.6);
-            padding: 4rem 0 2rem;
-            font-size: 0.9rem;
-        }
-
-        .footer__grid {
-            display: grid;
-            grid-template-columns: 2fr 1fr 1fr 1fr;
-            gap: 2.5rem;
-            margin-bottom: 3rem;
-        }
-
-        .footer__brand {
-            font-family: var(--font-heading);
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--clr-white);
-            margin-bottom: 0.5rem;
-        }
-
-        .footer ul {
-            list-style: none;
-            display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
-        }
-
-        .footer ul a {
-            color: rgba(255, 255, 255, 0.55);
-            font-size: 0.88rem;
-        }
-
-        .footer__bottom {
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            padding-top: 1.5rem;
-            display: flex;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            font-size: 0.8rem;
-            color: rgba(255, 255, 255, 0.35);
-        }
-
-        .scroll-top {
-            position: fixed;
-            bottom: 1.5rem;
-            right: 1.5rem;
-            width: 44px;
-            height: 44px;
-            border-radius: 50%;
-            background: var(--clr-forest);
-            color: var(--clr-white);
-            border: none;
-            cursor: pointer;
-            font-size: 1.2rem;
-            box-shadow: var(--shadow-lg);
-            opacity: 0;
-            pointer-events: none;
-            transform: translateY(15px);
-            transition: all var(--transition-smooth);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 900;
-        }
-
-        .scroll-top.visible {
-            opacity: 1;
-            pointer-events: all;
-            transform: translateY(0);
-        }
-
-        .toast {
-            position: fixed;
-            bottom: 2rem;
-            left: 50%;
-            transform: translateX(-50%) translateY(100px);
-            z-index: 2000;
-            background: var(--clr-deep);
-            color: var(--clr-white);
-            padding: 0.9rem 1.5rem;
-            border-radius: 50px;
-            box-shadow: var(--shadow-xl);
-            opacity: 0;
-            pointer-events: none;
-            transition: all var(--transition-bounce);
-            white-space: nowrap;
-        }
-
-        .toast.show {
-            opacity: 1;
-            transform: translateX(-50%) translateY(0);
-            pointer-events: all;
-        }
-
-        .reveal {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .reveal.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Responsive fine-tunes */
-        @media (max-width: 1024px) {
-            .about-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .registration-layout {
-                grid-template-columns: 1fr;
-            }
-
-            .registration-info {
-                position: static;
-            }
-
-            .footer__grid {
-                grid-template-columns: 1fr 1fr;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .nav__links {
-                display: none;
-            }
-
-            .nav__hamburger {
-                display: flex;
-            }
-
-            .nav__mobile-menu {
-                display: flex;
-            }
-
-            .tournament-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .form-row {
-                grid-template-columns: 1fr;
-            }
-
-            .news-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .footer__grid {
-                grid-template-columns: 1fr;
-            }
-
-            .about__visual {
-                min-height: 260px;
-            }
-
-            .about__visual svg {
-                width: 140px;
-            }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jumuiya Chess — Where Community Meets the Board</title>
+<meta name="description" content="Jumuiya Chess — Kenya's premier chess community. Tournaments, training, and a thriving community of minds.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ─── TOKENS ─────────────────────────────────────────── */
+:root{
+  --ink:#0d1a14;--forest:#163827;--fmid:#1e5038;
+  --gold:#c8973e;--gold-pale:#f0d99a;--gold-wash:#fdf8ed;
+  --sand:#f5efe3;--cream:#faf8f3;--white:#fff;
+  --mist:#e8e3d8;--slate:#6b6558;--charcoal:#2e3027;
+  --fd:'Playfair Display',Georgia,serif;
+  --fb:'DM Sans',system-ui,sans-serif;
+  --fm:'DM Mono',monospace;
+  --nav-h:60px;
+  --r-sm:8px;--r-md:14px;--r-lg:20px;--r-xl:28px;
+  --sh-sm:0 1px 4px rgba(0,0,0,.08);
+  --sh-md:0 6px 20px rgba(0,0,0,.11);
+  --sh-lg:0 16px 48px rgba(0,0,0,.15);
+  --sh-xl:0 32px 80px rgba(0,0,0,.18);
+  --ease:cubic-bezier(.4,0,.2,1);
+  --bounce:cubic-bezier(.34,1.56,.64,1);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:var(--nav-h);font-size:16px}
+body{font-family:var(--fb);background:var(--cream);color:var(--charcoal);
+  line-height:1.7;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img{display:block;max-width:100%;height:auto}
+a{text-decoration:none;color:inherit}
+h1,h2,h3,h4{font-family:var(--fd);line-height:1.15;color:var(--ink)}
+p{color:var(--slate);margin-bottom:.85rem}
+.container{width:100%;max-width:1220px;margin:0 auto;padding:0 1.25rem}
+
+/* ─── BUTTONS ─────────────────────────────────────────── */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.45rem;
+  padding:.72rem 1.5rem;font-family:var(--fb);font-size:.88rem;font-weight:600;
+  letter-spacing:.02em;border-radius:var(--r-sm);cursor:pointer;
+  border:2px solid transparent;transition:all .25s var(--ease);white-space:nowrap}
+.btn--gold{background:var(--gold);color:var(--ink);border-color:var(--gold)}
+.btn--gold:hover{background:#b8842e;border-color:#b8842e;transform:translateY(-1px);box-shadow:var(--sh-md)}
+.btn--forest{background:var(--forest);color:var(--white)}
+.btn--forest:hover{background:var(--fmid);transform:translateY(-1px);box-shadow:var(--sh-md)}
+.btn--ghost{background:transparent;color:var(--white);border-color:rgba(255,255,255,.4)}
+.btn--ghost:hover{background:rgba(255,255,255,.1);border-color:var(--white)}
+.btn--outline{background:transparent;color:var(--forest);border-color:var(--forest)}
+.btn--outline:hover{background:var(--forest);color:var(--white)}
+.btn--lg{padding:.9rem 2rem;font-size:.95rem;border-radius:var(--r-md)}
+.btn--sm{padding:.42rem 1rem;font-size:.8rem}
+.btn--block{width:100%;justify-content:center}
+
+/* ─── ANNOUNCEMENT ────────────────────────────────────── */
+.announce{background:var(--forest);color:rgba(255,255,255,.9);
+  text-align:center;font-size:.78rem;font-weight:500;
+  padding:.48rem 1rem;letter-spacing:.02em;line-height:1.5}
+.announce a{color:var(--gold-pale);text-decoration:underline}
+
+/* ─── NAV ─────────────────────────────────────────────── */
+.nav{position:sticky;top:0;z-index:900;height:var(--nav-h);
+  background:rgba(253,248,237,.96);backdrop-filter:blur(18px);
+  -webkit-backdrop-filter:blur(18px);border-bottom:1px solid var(--mist);
+  transition:box-shadow .3s var(--ease)}
+.nav.scrolled{box-shadow:var(--sh-sm)}
+.nav__inner{display:flex;align-items:center;justify-content:space-between;
+  height:100%;max-width:1220px;margin:0 auto;padding:0 1.25rem}
+.nav__logo{display:flex;align-items:center;gap:.55rem;
+  font-family:var(--fd);font-size:1.15rem;font-weight:700;color:var(--ink)}
+.nav__logo-mark{width:34px;height:34px;border-radius:var(--r-sm);
+  background:var(--ink);display:flex;align-items:center;justify-content:center;
+  color:var(--gold);font-size:1.1rem;flex-shrink:0}
+.nav__links{display:flex;align-items:center;gap:.05rem;list-style:none}
+.nav__links a{display:block;padding:.45rem .8rem;font-size:.83rem;font-weight:500;
+  color:var(--charcoal);border-radius:var(--r-sm);transition:all .18s}
+.nav__links a:hover,.nav__links a.active{color:var(--forest);background:rgba(22,56,39,.07)}
+.nav__links .nav-cta{background:var(--gold);color:var(--ink);font-weight:600;
+  margin-left:.35rem;padding:.45rem 1.1rem;border-radius:var(--r-sm)}
+.nav__links .nav-cta:hover{background:#b8842e;color:var(--ink)}
+.nav__burger{display:none;background:none;border:none;cursor:pointer;
+  padding:.5rem;flex-direction:column;gap:5px}
+.nav__burger span{display:block;width:22px;height:2px;
+  background:var(--ink);border-radius:2px;transition:all .3s var(--ease)}
+.nav__burger.open span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
+.nav__burger.open span:nth-child(2){opacity:0;transform:scaleX(0)}
+.nav__burger.open span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
+
+/* Mobile drawer */
+.nav__drawer{position:fixed;inset:0;z-index:800;background:var(--ink);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:.15rem;transform:translateX(100%);transition:transform .35s var(--ease);
+  pointer-events:none;padding:2rem 1.5rem}
+.nav__drawer.open{transform:translateX(0);pointer-events:all}
+.nav__drawer a{font-family:var(--fd);font-size:clamp(1.6rem,5vw,2.2rem);
+  font-weight:700;color:rgba(255,255,255,.75);padding:.55rem 1.5rem;
+  border-radius:var(--r-sm);transition:color .18s;text-align:center}
+.nav__drawer a:hover{color:var(--gold)}
+.nav__drawer .drawer-cta{margin-top:1.2rem;background:var(--gold);color:var(--ink);
+  font-family:var(--fb);font-size:.95rem;font-weight:700;
+  padding:.85rem 2.2rem;border-radius:var(--r-md)}
+
+/* ─── HERO ─────────────────────────────────────────────── */
+.hero{position:relative;background:var(--ink);
+  min-height:calc(100svh - var(--nav-h));
+  display:flex;align-items:center;overflow:hidden}
+.hero__board{position:absolute;inset:0;z-index:0;
+  background-image:repeating-conic-gradient(rgba(255,255,255,.022) 0% 25%,transparent 0% 50%);
+  background-size:52px 52px}
+.hero__media{position:absolute;inset:0;z-index:0}
+.hero__media img{width:100%;height:100%;object-fit:cover;
+  object-position:center 30%;opacity:.4;filter:saturate(.55)}
+.hero__overlay{position:absolute;inset:0;z-index:1;
+  background:linear-gradient(110deg,rgba(13,26,20,.97) 0%,rgba(13,26,20,.82) 50%,rgba(13,26,20,.3) 100%)}
+.hero__inner{position:relative;z-index:2;
+  display:grid;grid-template-columns:1fr 420px;
+  gap:2.5rem;align-items:center;padding:4rem 0}
+.hero__pill{display:inline-flex;align-items:center;gap:.5rem;
+  background:rgba(200,151,62,.14);border:1px solid rgba(200,151,62,.32);
+  color:var(--gold-pale);font-size:.72rem;font-weight:600;
+  letter-spacing:.1em;text-transform:uppercase;
+  padding:.34rem .85rem;border-radius:50px;margin-bottom:1rem}
+.hero__pill-dot{width:6px;height:6px;border-radius:50%;
+  background:var(--gold);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.35;transform:scale(.65)}}
+.hero__title{color:var(--white);font-size:clamp(2.4rem,4.8vw,4.4rem);
+  font-weight:900;line-height:1.06;margin-bottom:1.2rem}
+.hero__title em{color:var(--gold);font-style:italic}
+.hero__sub{color:rgba(255,255,255,.62);
+  font-size:clamp(.9rem,1.5vw,1.08rem);
+  max-width:480px;margin-bottom:2rem;line-height:1.65}
+.hero__actions{display:flex;flex-wrap:wrap;gap:.8rem;margin-bottom:2.5rem}
+.hero__stats{display:flex;flex-wrap:wrap;gap:2rem;
+  padding-top:1.8rem;border-top:1px solid rgba(255,255,255,.12)}
+.hero__stat-num{font-family:var(--fd);font-size:1.85rem;font-weight:900;
+  color:var(--gold);line-height:1}
+.hero__stat-lbl{font-size:.7rem;font-weight:600;text-transform:uppercase;
+  letter-spacing:.08em;color:rgba(255,255,255,.4);margin-top:.2rem}
+/* floating card stack — desktop only */
+.hero__cards{position:relative;height:420px;
+  display:flex;align-items:center;justify-content:center}
+.hero__card{position:absolute;border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--sh-xl)}
+.hero__card-1{width:240px;height:310px;top:0;left:20px;transform:rotate(-3deg);
+  border:3px solid rgba(200,151,62,.35)}
+.hero__card-2{width:210px;height:270px;bottom:0;right:0;transform:rotate(4deg);
+  border:3px solid rgba(255,255,255,.08);z-index:2}
+.hero__card img{width:100%;height:100%;object-fit:cover}
+.hero__badge{position:absolute;top:50%;right:-12px;transform:translateY(-50%);
+  background:var(--white);border-radius:var(--r-md);padding:.75rem 1rem;
+  box-shadow:var(--sh-lg);z-index:3;min-width:130px}
+.hero__badge-num{font-family:var(--fd);font-size:1.4rem;font-weight:900;
+  color:var(--forest);line-height:1}
+.hero__badge-lbl{font-size:.68rem;color:var(--slate);font-weight:500;margin-top:.18rem}
+
+/* ─── TRUST / INTEREST ────────────────────────────────── */
+.trust{background:var(--forest);padding:2.5rem 0}
+.trust__inner{display:grid;grid-template-columns:220px 1fr;
+  gap:2.5rem;align-items:center}
+.trust__heading{font-family:var(--fd);font-size:clamp(1.5rem,2.5vw,2rem);
+  font-weight:900;color:var(--white);line-height:1.2}
+.trust__heading em{color:var(--gold);font-style:normal}
+.trust__stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+.trust__stat{text-align:center}
+.trust__stat-num{font-family:var(--fd);font-size:clamp(1.8rem,2.5vw,2.4rem);
+  font-weight:900;color:var(--gold);line-height:1;display:block}
+.trust__stat-lbl{font-size:.72rem;font-weight:600;text-transform:uppercase;
+  letter-spacing:.08em;color:rgba(255,255,255,.45);display:block;margin-top:.25rem}
+.interest{background:var(--forest);padding-bottom:2.5rem;
+  border-bottom:3px solid rgba(200,151,62,.25)}
+.interest__card{background:var(--white);border-radius:var(--r-xl);
+  padding:1.75rem 2rem;max-width:640px;margin:0 auto;
+  box-shadow:0 20px 56px rgba(0,0,0,.22)}
+.interest__label{font-family:var(--fd);font-size:1rem;font-weight:700;
+  color:var(--ink);margin-bottom:.9rem}
+.interest__tabs{display:grid;grid-template-columns:1fr 1fr;gap:0;
+  border:2px solid var(--mist);border-radius:var(--r-sm);overflow:hidden;margin-bottom:1rem}
+.interest__tab{padding:.65rem;text-align:center;font-size:.84rem;font-weight:600;
+  color:var(--slate);cursor:pointer;border:none;background:transparent;
+  font-family:var(--fb);transition:all .2s}
+.interest__tab.active{background:var(--ink);color:var(--white)}
+.interest__sel,.interest__email-input{width:100%;padding:.7rem .95rem;
+  border:2px solid var(--mist);border-radius:var(--r-sm);
+  font-family:var(--fb);font-size:.9rem;background:var(--sand);color:var(--ink);
+  transition:border .2s;margin-bottom:.9rem;appearance:none}
+.interest__sel{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236b6558' stroke-width='2' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right .9rem center;padding-right:2rem}
+.interest__sel:focus,.interest__email-input:focus{outline:none;border-color:var(--forest);background:var(--white)}
+.interest__email-wrap{display:none;margin-bottom:.5rem}
+.interest__email-wrap.show{display:block}
+.interest__error{font-size:.78rem;color:#c0392b;display:none;
+  align-items:center;gap:.3rem;margin-bottom:.5rem}
+.interest__error.show{display:flex}
+.interest__actions{display:flex;justify-content:flex-end;gap:.7rem}
+
+/* ─── SECTION SCAFFOLDING ─────────────────────────────── */
+.section{padding:5rem 0}
+.section--sand{background:var(--sand)}
+.section--white{background:var(--white)}
+.section__eyebrow{display:inline-block;font-family:var(--fm);font-size:.72rem;
+  font-weight:500;text-transform:uppercase;letter-spacing:.12em;color:var(--gold);margin-bottom:.8rem}
+.section__title{margin-bottom:.7rem}
+.section__sub{max-width:560px;font-size:1rem;color:var(--slate)}
+.section__header{margin-bottom:3rem}
+.section__header--center{text-align:center}
+.section__header--center .section__sub{margin:0 auto}
+.divider{width:44px;height:3px;border-radius:2px;background:var(--gold);margin:.8rem 0 .9rem}
+.divider--center{margin-left:auto;margin-right:auto}
+
+/* ─── ABOUT ───────────────────────────────────────────── */
+.about__grid{display:grid;grid-template-columns:1fr 1fr;gap:3.5rem;align-items:center}
+.about__imagery{position:relative}
+.about__img-main{border-radius:var(--r-xl);overflow:hidden;aspect-ratio:4/3;box-shadow:var(--sh-xl)}
+.about__img-main img{width:100%;height:100%;object-fit:cover}
+.about__img-accent{position:absolute;bottom:-28px;right:-24px;width:180px;
+  border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--sh-lg);border:4px solid var(--white)}
+.about__img-accent img{width:100%;height:auto;display:block}
+.about__chip{position:absolute;top:-20px;left:-16px;background:var(--gold);color:var(--ink);
+  border-radius:var(--r-md);padding:.9rem 1.1rem;box-shadow:var(--sh-lg);
+  font-family:var(--fd);font-weight:900;font-size:2.2rem;line-height:1}
+.about__chip small{display:block;font-size:.6rem;font-weight:600;font-family:var(--fb);
+  text-transform:uppercase;letter-spacing:.08em;margin-top:.15rem}
+.about__pillars{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:1.8rem}
+.about__pillar{background:var(--sand);border-radius:var(--r-md);
+  padding:1.1rem;border-left:3px solid var(--gold)}
+.about__pillar-icon{font-size:1.3rem;margin-bottom:.35rem}
+.about__pillar h4{font-family:var(--fb);font-size:.88rem;font-weight:700;color:var(--ink);margin-bottom:.15rem}
+.about__pillar p{font-size:.78rem;margin:0}
+
+/* ─── WAYS / MOSAIC ───────────────────────────────────── */
+.ways__grid{display:grid;grid-template-columns:repeat(12,1fr);
+  grid-auto-rows:250px;gap:1rem}
+.way-card{position:relative;border-radius:var(--r-xl);overflow:hidden;
+  cursor:pointer;transition:transform .4s var(--ease),box-shadow .4s;background:var(--forest)}
+.way-card:hover{transform:translateY(-5px);box-shadow:var(--sh-xl)}
+.way-card:nth-child(1){grid-column:span 5;grid-row:span 2}
+.way-card:nth-child(2){grid-column:span 7}
+.way-card:nth-child(3){grid-column:span 4}
+.way-card:nth-child(4){grid-column:span 3}
+.way-card__bg{position:absolute;inset:0;background-size:cover;background-position:center;
+  transition:transform .5s var(--ease)}
+.way-card:hover .way-card__bg{transform:scale(1.05)}
+.way-card__overlay{position:absolute;inset:0;
+  background:linear-gradient(175deg,transparent 20%,rgba(13,26,20,.88) 100%)}
+.way-card__body{position:absolute;bottom:0;left:0;right:0;padding:1.5rem;z-index:1}
+.way-card__tag{display:inline-block;background:var(--gold);color:var(--ink);
+  font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;
+  padding:.22rem .65rem;border-radius:50px;margin-bottom:.5rem}
+.way-card__title{font-family:var(--fd);font-size:1.25rem;font-weight:700;
+  color:var(--white);margin-bottom:.35rem;line-height:1.2}
+.way-card:nth-child(1) .way-card__title{font-size:1.65rem}
+.way-card__desc{font-size:.8rem;color:rgba(255,255,255,.68);line-height:1.45;margin:0}
+.way-card__arrow{display:inline-flex;align-items:center;gap:.35rem;
+  color:var(--gold-pale);font-size:.78rem;font-weight:600;margin-top:.6rem;transition:gap .2s}
+.way-card:hover .way-card__arrow{gap:.65rem}
+
+/* ─── TOURNAMENTS ─────────────────────────────────────── */
+.t-filter{display:flex;flex-wrap:wrap;gap:.45rem;margin-bottom:1.8rem}
+.t-filter-btn{padding:.45rem 1.1rem;border-radius:50px;font-size:.82rem;font-weight:600;
+  cursor:pointer;border:2px solid var(--mist);background:var(--white);
+  color:var(--slate);font-family:var(--fb);transition:all .2s}
+.t-filter-btn:hover{border-color:var(--gold);color:var(--ink)}
+.t-filter-btn.active{background:var(--ink);border-color:var(--ink);color:var(--white)}
+.t-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.25rem}
+.t-card{background:var(--white);border-radius:var(--r-lg);border:1px solid var(--mist);
+  overflow:hidden;transition:all .3s var(--ease);display:flex;flex-direction:column}
+.t-card:hover{box-shadow:var(--sh-lg);transform:translateY(-3px);border-color:var(--gold)}
+.t-card__stripe{height:4px}
+.stripe-open{background:linear-gradient(90deg,#059669,#10b981)}
+.stripe-soon{background:linear-gradient(90deg,#d97706,#f59e0b)}
+.stripe-weekly{background:linear-gradient(90deg,#2563eb,#60a5fa)}
+.t-card__head{padding:1.1rem 1.25rem .65rem}
+.t-badge{font-size:.65rem;font-weight:700;text-transform:uppercase;
+  letter-spacing:.07em;padding:.25rem .6rem;border-radius:50px;display:inline-block;margin-bottom:.45rem}
+.t-badge--open{background:#d1fae5;color:#065f46}
+.t-badge--soon{background:#fef3c7;color:#92400e}
+.t-badge--weekly{background:#dbeafe;color:#1e40af}
+.t-card__name{font-size:1.08rem;margin-bottom:.18rem}
+.t-card__format{font-size:.78rem;color:var(--slate);font-family:var(--fm)}
+.t-card__body{padding:.65rem 1.25rem;flex:1}
+.t-card__row{display:flex;align-items:center;gap:.55rem;
+  font-size:.82rem;color:var(--slate);margin-bottom:.38rem}
+.t-card__icon{width:16px;text-align:center;flex-shrink:0}
+.t-card__prize{display:inline-flex;align-items:center;gap:.35rem;
+  background:var(--gold-wash);color:var(--forest);font-weight:700;
+  font-size:.76rem;padding:.28rem .65rem;border-radius:50px;
+  border:1px solid rgba(200,151,62,.28);margin-top:.45rem}
+.t-card__foot{padding:.65rem 1.25rem 1.25rem;display:flex;gap:.6rem;flex-wrap:wrap}
+
+/* ─── REGISTRATION ────────────────────────────────────── */
+.reg-layout{display:grid;grid-template-columns:300px 1fr;gap:2rem;align-items:start}
+.reg-sidebar{background:var(--ink);border-radius:var(--r-xl);padding:2rem;
+  position:sticky;top:calc(var(--nav-h) + 1.25rem);color:var(--white)}
+.reg-sidebar h3{color:var(--white);margin-bottom:.9rem;font-size:1.2rem}
+.reg-sidebar__list{list-style:none;display:flex;flex-direction:column;gap:.6rem}
+.reg-sidebar__list li{display:flex;align-items:flex-start;gap:.55rem;
+  font-size:.84rem;color:rgba(255,255,255,.68);line-height:1.5}
+.reg-sidebar__list li::before{content:'✓';flex-shrink:0;color:var(--gold);font-weight:700;margin-top:.05rem}
+.reg-sidebar__note{margin-top:1.25rem;padding-top:1.25rem;border-top:1px solid rgba(255,255,255,.12);
+  font-size:.75rem;color:rgba(255,255,255,.42);line-height:1.6}
+.reg-sidebar__contact{display:flex;align-items:center;gap:.45rem;
+  color:var(--gold-pale);font-size:.79rem;font-weight:500;margin-top:.9rem;word-break:break-all}
+.form-card{background:var(--white);border-radius:var(--r-xl);
+  padding:2.2rem;border:1px solid var(--mist);box-shadow:var(--sh-md)}
+.form-card h3{margin-bottom:.25rem;font-size:1.3rem}
+.form-card__sub{font-size:.86rem;color:var(--slate);margin-bottom:1.6rem}
+.fsect{font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;
+  color:var(--slate);border-bottom:1px solid var(--mist);padding-bottom:.45rem;
+  margin:1.4rem 0 1rem;font-family:var(--fm)}
+.f-row{display:grid;grid-template-columns:1fr 1fr;gap:.9rem}
+.f-grp{margin-bottom:1rem}
+.f-grp label{display:block;font-size:.79rem;font-weight:600;color:var(--charcoal);margin-bottom:.3rem}
+.f-grp .req{color:#c0392b;margin-left:2px}
+.f-grp input,.f-grp select,.f-grp textarea{width:100%;padding:.66rem .9rem;
+  border:1.5px solid var(--mist);border-radius:var(--r-sm);
+  font-family:var(--fb);font-size:.88rem;background:var(--sand);color:var(--ink);
+  transition:border .18s,box-shadow .18s,background .18s;appearance:none}
+.f-grp select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236b6558' stroke-width='2' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right .9rem center;padding-right:2.1rem}
+.f-grp input:focus,.f-grp select:focus,.f-grp textarea:focus{outline:none;
+  border-color:var(--gold);box-shadow:0 0 0 3px rgba(200,151,62,.12);background:var(--white)}
+.f-grp input.err,.f-grp select.err{border-color:#e74c3c}
+.f-err{font-size:.73rem;color:#c0392b;margin-top:.28rem;display:none}
+.f-err.show{display:block}
+.f-check{display:flex;align-items:flex-start;gap:.55rem;margin-top:.35rem}
+.f-check input[type=checkbox]{width:17px;height:17px;flex-shrink:0;
+  accent-color:var(--forest);margin-top:3px;cursor:pointer}
+.f-check label{font-size:.84rem;color:var(--charcoal);cursor:pointer}
+.form-footer{margin-top:1.8rem;display:flex;gap:.9rem;align-items:center;flex-wrap:wrap}
+.form-success{display:none;text-align:center;padding:2.5rem 1rem}
+.form-success.show{display:block}
+.form-success__icon{font-size:2.8rem;margin-bottom:.9rem}
+.form-success h3{margin-bottom:.45rem}
+
+/* ─── NEWS ────────────────────────────────────────────── */
+.news-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem}
+.news-card{background:var(--white);border-radius:var(--r-lg);border:1px solid var(--mist);
+  overflow:hidden;transition:all .3s;display:flex;flex-direction:column}
+.news-card:hover{box-shadow:var(--sh-lg);transform:translateY(-3px)}
+.news-card__img{aspect-ratio:16/9;background:var(--fmid);display:flex;align-items:center;
+  justify-content:center;font-size:3rem;position:relative;overflow:hidden}
+.news-card__date{position:absolute;bottom:.55rem;right:.55rem;
+  background:rgba(0,0,0,.5);color:rgba(255,255,255,.9);font-size:.68rem;
+  padding:.22rem .55rem;border-radius:50px;font-weight:500}
+.news-card__body{padding:1.2rem;flex:1;display:flex;flex-direction:column}
+.news-card__tag{font-size:.65rem;font-weight:700;text-transform:uppercase;
+  letter-spacing:.08em;color:var(--gold);margin-bottom:.28rem;font-family:var(--fm)}
+.news-card__title{font-size:1rem;margin-bottom:.38rem}
+.news-card__excerpt{font-size:.82rem;color:var(--slate);flex:1;margin:0}
+.news-card__link{display:inline-flex;align-items:center;gap:.32rem;
+  font-size:.78rem;font-weight:600;color:var(--forest);margin-top:.7rem;transition:gap .2s}
+.news-card__link:hover{gap:.55rem;color:var(--gold)}
+
+/* ─── CTA BAND ────────────────────────────────────────── */
+.cta-band{background:var(--ink);position:relative;overflow:hidden;padding:4.5rem 0}
+.cta-band__board{position:absolute;inset:0;
+  background-image:repeating-conic-gradient(rgba(255,255,255,.018) 0% 25%,transparent 0% 50%);
+  background-size:56px 56px}
+.cta-band__glow{position:absolute;width:600px;height:400px;border-radius:50%;
+  background:radial-gradient(ellipse,rgba(200,151,62,.11) 0%,transparent 70%);
+  top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none}
+.cta-band__inner{position:relative;z-index:1;text-align:center}
+.cta-band__title{font-size:clamp(1.9rem,4vw,3rem);color:var(--white);margin-bottom:.7rem}
+.cta-band__title em{color:var(--gold);font-style:italic}
+.cta-band__sub{color:rgba(255,255,255,.5);max-width:480px;margin:0 auto 1.8rem;font-size:1rem}
+.cta-band__actions{display:flex;justify-content:center;flex-wrap:wrap;gap:.9rem}
+
+/* ─── FOOTER ──────────────────────────────────────────── */
+.footer{background:var(--charcoal);color:rgba(255,255,255,.5);padding:3.5rem 0 1.6rem}
+.footer__grid{display:grid;grid-template-columns:2fr 1fr 1fr 1.2fr;gap:2rem;margin-bottom:2.5rem}
+.footer__brand{font-family:var(--fd);font-size:1.35rem;font-weight:900;color:var(--white);
+  display:flex;align-items:center;gap:.45rem;margin-bottom:.5rem}
+.footer__brand-mark{width:30px;height:30px;border-radius:var(--r-sm);background:var(--gold);
+  display:flex;align-items:center;justify-content:center;color:var(--ink);font-size:1rem}
+.footer__desc{font-size:.82rem;line-height:1.65;max-width:280px}
+.footer__col h4{font-family:var(--fb);font-size:.68rem;font-weight:700;text-transform:uppercase;
+  letter-spacing:.1em;color:rgba(255,255,255,.3);margin-bottom:.8rem}
+.footer__col ul{list-style:none;display:flex;flex-direction:column;gap:.4rem}
+.footer__col ul a{font-size:.82rem;transition:color .18s}
+.footer__col ul a:hover{color:var(--gold-pale)}
+.footer__social{display:flex;gap:.6rem;margin-top:.9rem}
+.footer__social a{width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,.08);
+  display:flex;align-items:center;justify-content:center;font-size:.8rem;transition:background .2s}
+.footer__social a:hover{background:var(--gold);color:var(--ink)}
+.footer__bottom{border-top:1px solid rgba(255,255,255,.08);padding-top:1.25rem;
+  display:flex;justify-content:space-between;flex-wrap:wrap;gap:.45rem;
+  font-size:.74rem;color:rgba(255,255,255,.25)}
+
+/* ─── UTILITIES ───────────────────────────────────────── */
+.stb{position:fixed;bottom:1.25rem;right:1.25rem;z-index:500;width:42px;height:42px;
+  border-radius:50%;background:var(--forest);color:var(--white);border:none;cursor:pointer;
+  font-size:1rem;box-shadow:var(--sh-lg);display:flex;align-items:center;justify-content:center;
+  opacity:0;pointer-events:none;transform:translateY(12px);transition:all .3s var(--ease)}
+.stb.show{opacity:1;pointer-events:all;transform:translateY(0)}
+.toast{position:fixed;bottom:1.5rem;left:50%;transform:translateX(-50%) translateY(80px);
+  background:var(--ink);color:var(--white);padding:.85rem 1.4rem;border-radius:50px;
+  box-shadow:var(--sh-xl);z-index:9999;font-size:.84rem;opacity:0;pointer-events:none;
+  white-space:nowrap;transition:all .35s var(--bounce);max-width:90vw;text-align:center}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .6s var(--ease),transform .6s var(--ease)}
+.reveal.in{opacity:1;transform:translateY(0)}
+.rd1{transition-delay:.08s}.rd2{transition-delay:.16s}.rd3{transition-delay:.24s}
+
+/* ════════════════════════════════════════════════════════
+   RESPONSIVE — written mobile-first, layering up
+   ════════════════════════════════════════════════════════ */
+
+/* ── ≤ 1100px: tablet landscape ──────────────────────── */
+@media(max-width:1100px){
+  .hero__inner{grid-template-columns:1fr;gap:0;padding:3.5rem 0 3rem}
+  .hero__cards{display:none}
+  .ways__grid{grid-template-columns:repeat(6,1fr);grid-auto-rows:230px}
+  .way-card:nth-child(1){grid-column:span 3;grid-row:span 2}
+  .way-card:nth-child(2){grid-column:span 3}
+  .way-card:nth-child(3){grid-column:span 3}
+  .way-card:nth-child(4){grid-column:span 3}
+  .footer__grid{grid-template-columns:1fr 1fr;gap:1.75rem}
+}
+
+/* ── ≤ 900px: tablet portrait ────────────────────────── */
+@media(max-width:900px){
+  .nav__links{display:none}
+  .nav__burger{display:flex}
+  .trust__inner{grid-template-columns:1fr;gap:1.25rem;text-align:center}
+  .trust__stats{grid-template-columns:repeat(3,1fr)}
+  .about__grid{grid-template-columns:1fr;gap:2.5rem}
+  .about__imagery{padding-bottom:2rem}
+  .about__img-accent{display:none}
+  .about__chip{top:-16px;left:-10px;font-size:1.8rem;padding:.7rem .9rem}
+  .reg-layout{grid-template-columns:1fr;gap:1.5rem}
+  .reg-sidebar{position:static}
+  .section{padding:4rem 0}
+}
+
+/* ── ≤ 720px: large phone / small tablet ─────────────── */
+@media(max-width:720px){
+  .ways__grid{grid-template-columns:1fr 1fr;grid-auto-rows:210px;gap:.8rem}
+  .way-card:nth-child(1){grid-column:span 2;grid-row:span 1}
+  .way-card:nth-child(2),.way-card:nth-child(3),.way-card:nth-child(4){grid-column:span 1}
+  .way-card__title{font-size:1.05rem!important}
+  .way-card__desc{display:none}
+  .news-grid{grid-template-columns:1fr 1fr}
+  .t-grid{grid-template-columns:1fr}
+  .about__pillars{grid-template-columns:1fr}
+  .f-row{grid-template-columns:1fr}
+  .form-card{padding:1.5rem}
+  .reg-sidebar{padding:1.5rem}
+  .section{padding:3.5rem 0}
+  .hero__title{font-size:clamp(2rem,7vw,3rem)}
+  .hero__sub{font-size:.9rem;max-width:100%}
+  .hero__stats{gap:1.5rem}
+}
+
+/* ── ≤ 560px: typical phone ──────────────────────────── */
+@media(max-width:560px){
+  :root{--nav-h:56px}
+  .announce{font-size:.72rem;padding:.42rem .9rem}
+  .nav__logo{font-size:1rem}
+  .nav__logo-mark{width:30px;height:30px;font-size:1rem}
+  .hero__inner{padding:2.5rem 0 2rem}
+  .hero__title{font-size:clamp(1.9rem,8vw,2.8rem)}
+  .hero__actions{flex-direction:column}
+  .hero__actions .btn{width:100%;justify-content:center}
+  .hero__stats{gap:1.25rem}
+  .hero__stat-num{font-size:1.6rem}
+  .trust__stats{grid-template-columns:repeat(3,1fr);gap:.6rem}
+  .trust__stat-num{font-size:1.7rem}
+  .interest__card{padding:1.35rem;border-radius:var(--r-lg)}
+  .interest__actions{justify-content:stretch}
+  .interest__actions .btn{flex:1;justify-content:center}
+  .ways__grid{grid-template-columns:1fr;grid-auto-rows:195px}
+  .way-card:nth-child(1),.way-card:nth-child(2),
+  .way-card:nth-child(3),.way-card:nth-child(4){grid-column:span 1}
+  .way-card__desc{display:none}
+  .t-filter{gap:.35rem}
+  .t-filter-btn{padding:.38rem .9rem;font-size:.78rem}
+  .t-card__foot{flex-direction:column}
+  .t-card__foot .btn{width:100%;justify-content:center}
+  .news-grid{grid-template-columns:1fr}
+  .cta-band{padding:3.5rem 0}
+  .cta-band__actions{flex-direction:column;align-items:center}
+  .cta-band__actions .btn{width:100%;max-width:300px;justify-content:center}
+  .footer__grid{grid-template-columns:1fr}
+  .footer__bottom{flex-direction:column;gap:.4rem}
+  .footer__desc{max-width:100%}
+  .section{padding:3rem 0}
+  .section__header{margin-bottom:2rem}
+  .about__pillars{grid-template-columns:1fr}
+  h2{font-size:clamp(1.7rem,5.5vw,2.4rem)}
+  h3{font-size:clamp(1rem,3.5vw,1.3rem)}
+  .form-footer .btn{width:100%;justify-content:center}
+  .reg-layout{gap:1.25rem}
+}
+
+/* ── ≤ 380px: very small phone ───────────────────────── */
+@media(max-width:380px){
+  .hero__title{font-size:1.85rem}
+  .trust__stat-num{font-size:1.45rem}
+  .trust__stat-lbl{font-size:.62rem}
+  .interest__tabs{grid-template-columns:1fr 1fr}
+  .interest__tab{font-size:.78rem;padding:.55rem .4rem}
+  .nav__logo-text{display:none}
+  .nav__logo{gap:.4rem}
+}
+</style>
 </head>
-
 <body>
 
-    <!-- Navigation -->
-    <nav class="nav" id="nav">
-        <div class="nav__inner">
-            <a href="#home" class="nav__logo"><span class="nav__logo-icon">♞</span>Jumuiya Chess</a>
-            <ul class="nav__links" id="navLinks">
-                <li><a href="#home" class="active">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#tournaments">Tournaments</a></li>
-                <li><a href="#register">Register</a></li>
-                <li><a href="#news">News</a></li>
-                <li><a href="#register" class="nav-cta">Join Tournament</a></li>
-            </ul>
-            <button class="nav__hamburger" id="navHamburger"
-                aria-label="Menu"><span></span><span></span><span></span></button>
+<!-- ANNOUNCEMENT -->
+<div class="announce">
+  🏆 <strong>Jumuiya Rapid Open — 14 June 2026.</strong> Registration is now open. <a href="#register">Secure your spot →</a>
+</div>
+
+<!-- NAV -->
+<nav class="nav" id="nav">
+  <div class="nav__inner">
+    <a href="#home" class="nav__logo">
+      <span class="nav__logo-mark">♞</span>
+      <span class="nav__logo-text">Jumuiya Chess</span>
+    </a>
+    <ul class="nav__links" id="navLinks">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#get-involved">Programs</a></li>
+      <li><a href="#tournaments">Tournaments</a></li>
+      <li><a href="#news">News</a></li>
+      <li><a href="#register" class="nav-cta">Register Now</a></li>
+    </ul>
+    <button class="nav__burger" id="burger" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+<div class="nav__drawer" id="drawer">
+  <a href="#home">Home</a>
+  <a href="#about">About</a>
+  <a href="#get-involved">Programs</a>
+  <a href="#tournaments">Tournaments</a>
+  <a href="#news">News</a>
+  <a href="#register" class="drawer-cta btn">Register Now</a>
+</div>
+
+<!-- ── HERO ─────────────────────────────────────────────── -->
+<section class="hero" id="home">
+  <div class="hero__board"></div>
+  <div class="hero__media">
+    <img src="https://i.pinimg.com/1200x/2c/1f/63/2c1f63d4681426cae723cda7040bd737.jpg" alt="Chess players in Kenya" loading="eager">
+  </div>
+  <div class="hero__overlay"></div>
+  <div class="container">
+    <div class="hero__inner">
+      <div class="hero__text">
+        <div class="hero__pill"><span class="hero__pill-dot"></span>Kenya's Chess Community</div>
+        <h1 class="hero__title">Where <em>Community</em><br>Meets the Board</h1>
+        <p class="hero__sub">Jumuiya Chess unites players of every age and skill level across Kenya — from grassroots school programmes to FIDE-rated championships.</p>
+        <div class="hero__actions">
+          <a href="#register" class="btn btn--gold btn--lg">Register for a Tournament</a>
+          <a href="#tournaments" class="btn btn--ghost btn--lg">Browse Events</a>
         </div>
-        <div class="nav__mobile-menu" id="navMobileMenu">
-            <a href="#home">Home</a><a href="#about">About</a><a href="#tournaments">Tournaments</a><a
-                href="#register">Register</a><a href="#news">News</a>
-            <a href="#register" class="nav-cta-mobile">Join Tournament</a>
+        <div class="hero__stats">
+          <div class="hero__stat">
+            <div class="hero__stat-num">1,500+</div>
+            <div class="hero__stat-lbl">Members</div>
+          </div>
+          <div class="hero__stat">
+            <div class="hero__stat-num">2,500+</div>
+            <div class="hero__stat-lbl">Weekly Students</div>
+          </div>
+          <div class="hero__stat">
+            <div class="hero__stat-num">47</div>
+            <div class="hero__stat-lbl">Schools Reached</div>
+          </div>
         </div>
-    </nav>
-
-    <!-- Hero Section with image and SVG -->
-    <section class="hero" id="home">
-        <div class="hero__bg-pattern"></div>
-        <div class="hero__piece-float hero__piece-float--1">♛</div>
-        <div class="hero__piece-float hero__piece-float--2">♟</div>
-        <div class="container">
-            <div class="hero__grid">
-                <!-- Left: Text content -->
-                <div class="hero__text">
-                    <span class="hero__eyebrow">Kenya's Chess Community</span>
-                    <h1 class="hero__title">Where <span>Community</span> Meets the Board</h1>
-                    <p class="hero__subtitle">
-                        Jumuiya Chess brings together players of all ages and skill levels across Kenya.
-                        From grassroots training to competitive tournaments, we celebrate minds of all kinds.
-                    </p>
-                    <div class="hero__actions">
-                        <a href="#register" class="btn btn--primary btn--lg">Register for a Tournament</a>
-                        <a href="#tournaments" class="btn btn--outline-light btn--lg">View Tournaments</a>
-                    </div>
-
-                </div>
-                <!-- Right: Visual collage (image only) -->
-                <div class="hero__visual">
-                    <div class="hero__visual-collage">
-                        <img src="https://i.pinimg.com/1200x/2c/1f/63/2c1f63d4681426cae723cda7040bd737.jpg"
-                            alt="Chess community in Kenya" class="hero__image" loading="lazy">
-                    </div>
-                </div>
-            </div>
+      </div>
+      <!-- desktop-only floating cards -->
+      <div class="hero__cards" aria-hidden="true">
+        <div class="hero__card hero__card-1">
+          <img src="https://i.pinimg.com/1200x/c8/e8/fb/c8e8fb1e14acb11634df0b53ad2c0e06.jpg" alt="">
         </div>
-    </section>
-
-    <!-- Trusted by Thousands Section -->
-    <section class="trusted-section">
-        <div class="trusted-container">
-            <div class="trusted-heading reveal">
-                Trusted by<br>Thousands
-            </div>
-            <div class="trusted-stats reveal">
-                <div class="trusted-stat">
-                    <div class="trusted-stat__number">1500+</div>
-                    <div class="trusted-stat__label">Members</div>
-                </div>
-                <div class="trusted-stat">
-                    <div class="trusted-stat__number">2500+</div>
-                    <div class="trusted-stat__label">Weekly Students</div>
-                </div>
-                <div class="trusted-stat">
-                    <div class="trusted-stat__number">10000+</div>
-                    <div class="trusted-stat__label">Community Impact</div>
-                </div>
-            </div>
+        <div class="hero__card hero__card-2">
+          <img src="https://i.pinimg.com/736x/c4/ca/82/c4ca820351eff4ceca338c2226fbc352.jpg" alt="">
         </div>
-    </section>
-
-    <!-- Interest Form Section -->
-    <section class="section section--alt" style="padding: 3rem 0;">
-        <div class="container">
-            <div class="trusted-form reveal" style="max-width: 600px; margin: 0 auto;">
-                <label class="trusted-form__label">I am interested in... <span
-                        style="color: var(--clr-red);">*</span></label>
-                <div class="trusted-form__tabs">
-                    <button class="trusted-form__tab active" data-option="adult">Adult Options</button>
-                    <button class="trusted-form__tab" data-option="youth">Youth Options</button>
-                </div>
-                <select class="trusted-form__input" id="interestSelect" required>
-                    <option value="">Choose an option.</option>
-                    <option value="tournaments">Tournament Participation</option>
-                    <option value="coaching">Coaching & Training</option>
-                    <option value="club">Join a Club</option>
-                    <option value="casual">Casual Play</option>
-                </select>
-                <div class="trusted-form__error" id="errorMsg" style="display: none;">
-                    <span class="trusted-form__error-icon">⚠</span>
-                    <span>Choose an option.</span>
-                </div>
-
-                <!-- Email field - hidden initially -->
-                <div id="emailSection" style="display: none;">
-                    <label class="trusted-form__label">Email Address <span
-                            style="color: var(--clr-red);">*</span></label>
-                    <input type="email" class="trusted-form__input" id="emailInput" placeholder="Enter your email"
-                        required>
-                    <div class="trusted-form__error" id="emailError" style="display: none;">
-                        <span class="trusted-form__error-icon">⚠</span>
-                        <span id="emailErrorMsg">Please enter a valid email.</span>
-                    </div>
-                </div>
-
-                <div class="trusted-form__actions">
-                    <button class="trusted-form__button" id="nextBtn">Next</button>
-                    <button class="trusted-form__button" id="submitBtn" style="display: none;">Submit</button>
-                </div>
-            </div>
+        <div class="hero__badge">
+          <div class="hero__badge-num">♟ FIDE</div>
+          <div class="hero__badge-lbl">Rated Tournaments</div>
         </div>
-    </section>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <!-- About Section with SVG -->
-    <section class="section section--alt" id="about">
-        <div class="container">
-            <div class="section__header reveal">
-                <h2>Our Mission & Vision</h2>
-                <div class="section__divider"></div>
-                <p>Building a thriving chess ecosystem rooted in community, excellence, and inclusivity across East
-                    Africa.</p>
-            </div>
-            <div class="about-grid">
-                <div class="about__visual reveal">
-                    <div class="about__visual-bg"></div>
-                    <div class="about__visual-inner">
-                        <!-- Same SVG as in hero, now the centerpiece of the mission visual -->
-                        <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <rect width="200" height="200" rx="16" fill="#1b3a32" />
-                            <g opacity="0.85">
-                                <rect x="0" y="0" width="50" height="50" fill="#c9a84c" />
-                                <rect x="100" y="0" width="50" height="50" fill="#c9a84c" />
-                                <rect x="50" y="50" width="50" height="50" fill="#c9a84c" />
-                                <rect x="150" y="50" width="50" height="50" fill="#c9a84c" />
-                                <rect x="0" y="100" width="50" height="50" fill="#c9a84c" />
-                                <rect x="100" y="100" width="50" height="50" fill="#c9a84c" />
-                                <rect x="50" y="150" width="50" height="50" fill="#c9a84c" />
-                                <rect x="150" y="150" width="50" height="50" fill="#c9a84c" />
-                            </g>
-                            <g transform="translate(75, 50) scale(0.55)">
-                                <path
-                                    d="M45 20 C45 8 35 0 25 0 C15 0 5 8 5 20 C5 28 10 35 15 38 L10 50 L40 50 L35 38 C40 35 45 28 45 20 Z"
-                                    fill="#f7f0d9" />
-                                <circle cx="25" cy="15" r="4" fill="#c9a84c" />
-                                <path d="M10 50 L15 70 L35 70 L40 50 Z" fill="#f7f0d9" />
-                                <rect x="12" y="70" width="26" height="8" rx="2" fill="#f7f0d9" />
-                            </g>
-                            <g transform="translate(125, 110) scale(0.5)">
-                                <circle cx="25" cy="15" r="12" fill="#f7f0d9" />
-                                <path d="M13 25 L13 45 C13 50 17 55 25 55 C33 55 37 50 37 45 L37 25 Z" fill="#f7f0d9" />
-                                <rect x="15" y="45" width="20" height="6" rx="2" fill="#f7f0d9" />
-                            </g>
-                        </svg>
-                        <span class="about__visual-label">Jumuiya</span>
-                    </div>
-                </div>
-                <div class="about__text reveal">
-                    <h3>More Than a Game — A Movement</h3>
-                    <p><em>Jumuiya</em> — Swahili for "community" — embodies our core belief: chess is best experienced
-                        together. Founded in Nairobi, we have grown into a nationwide network connecting players,
-                        coaches, and enthusiasts.</p>
-                    <div class="about__features">
-                        <div class="about__feature"><span class="about__feature-icon">🎯</span><span
-                                class="about__feature-text"><strong>Competitive Excellence</strong>FIDE-rated
-                                tournaments & pathways</span></div>
-                        <div class="about__feature"><span class="about__feature-icon">🌱</span><span
-                                class="about__feature-text"><strong>Grassroots Development</strong>School & community
-                                programmes</span></div>
-                        <div class="about__feature"><span class="about__feature-icon">🤝</span><span
-                                class="about__feature-text"><strong>Inclusive Community</strong>All ages, genders &
-                                abilities</span></div>
-                        <div class="about__feature"><span class="about__feature-icon">🌍</span><span
-                                class="about__feature-text"><strong>Pan-African Vision</strong>Connecting across the
-                                continent</span></div>
-                    </div>
-                </div>
-            </div>
+<!-- ── TRUST BAR ──────────────────────────────────────── -->
+<section class="trust">
+  <div class="container">
+    <div class="trust__inner reveal">
+      <div class="trust__heading">Trusted by<br><em>Thousands</em></div>
+      <div class="trust__stats">
+        <div class="trust__stat">
+          <span class="trust__stat-num">1,500+</span>
+          <span class="trust__stat-lbl">Members</span>
         </div>
-    </section>
-
-    <!-- Ways to Get Involved Section -->
-    <section class="ways-section" id="get-involved">
-        <div class="container">
-            <div class="ways-header reveal">
-                <h2 class="ways-header__title">Ways to Get Involved</h2>
-                <p class="ways-header__subtitle">Whether you're a beginner picking up a piece for the first time or a
-                    seasoned grandmaster, there's a place for you in the Jumuiya community.</p>
-            </div>
-            <div class="ways-grid">
-                <div class="ways-card reveal">
-                    <div class="ways-card__visual"
-                        style="background-image: url('https://i.pinimg.com/1200x/c8/e8/fb/c8e8fb1e14acb11634df0b53ad2c0e06.jpg');">
-                    </div>
-                    <div class="ways-card__content">
-                        <div class="ways-card__header">
-                            <h3 class="ways-card__title">Training & Coaching</h3>
-                            <p class="ways-card__subtitle">Learn from experienced coaches</p>
-                        </div>
-                        <ul class="ways-card__list">
-                            <li class="ways-card__list-item">Classes for all levels — beginner to master</li>
-                            <li class="ways-card__list-item">In-person sessions at multiple locations & online options
-                            </li>
-                            <li class="ways-card__list-item">Coaching staff led by experienced players</li>
-                            <li class="ways-card__list-item">Professionally designed curriculum & workbooks</li>
-                            <li class="ways-card__list-item">Monthly progress reports for regular feedback</li>
-                        </ul>
-                        <a href="#" class="ways-card__cta">Learn More <span class="ways-card__cta-icon">→</span></a>
-                    </div>
-                </div>
-
-                <div class="ways-card reveal">
-                    <div class="ways-card__visual"
-                        style="background-image: url('https://i.pinimg.com/736x/c4/ca/82/c4ca820351eff4ceca338c2226fbc352.jpg');">
-                    </div>
-                    <div class="ways-card__content">
-                        <div class="ways-card__header">
-                            <h3 class="ways-card__title">Play & Compete</h3>
-                            <p class="ways-card__subtitle">Test your skills in our events</p>
-                        </div>
-                        <ul class="ways-card__list">
-                            <li class="ways-card__list-item">Events 7 days a week at multiple locations</li>
-                            <li class="ways-card__list-item">FIDE-rated tournaments with prize pools</li>
-                            <li class="ways-card__list-item">Rapid, blitz, and classical formats</li>
-                            <li class="ways-card__list-item">Junior championships & school leagues</li>
-                            <li class="ways-card__list-item">Online tournaments for remote players</li>
-                        </ul>
-                        <a href="#tournaments" class="ways-card__cta">Browse Tournaments <span
-                                class="ways-card__cta-icon">→</span></a>
-                    </div>
-                </div>
-
-                <div class="ways-card reveal">
-                    <div class="ways-card__visual"
-                        style="background-image: url('https://i.pinimg.com/webp85/736x/94/81/03/9481035c7e22647d77978a5a2b97ba27.webp');">
-                    </div>
-                    <div class="ways-card__content">
-                        <div class="ways-card__header">
-                            <h3 class="ways-card__title">Community</h3>
-                            <p class="ways-card__subtitle">Connect with fellow chess enthusiasts</p>
-                        </div>
-                        <ul class="ways-card__list">
-                            <li class="ways-card__list-item">Join our active WhatsApp & Discord communities</li>
-                            <li class="ways-card__list-item">Attend monthly meetups & social events</li>
-                            <li class="ways-card__list-item">Participate in friendly club matches</li>
-                            <li class="ways-card__list-item">Access exclusive member resources & analysis</li>
-                            <li class="ways-card__list-item">Network with players across East Africa</li>
-                        </ul>
-                        <a href="#" class="ways-card__cta">Join Community <span class="ways-card__cta-icon">→</span></a>
-                    </div>
-                </div>
-
-                <div class="ways-card reveal">
-                    <div class="ways-card__visual"
-                        style="background: linear-gradient(135deg, #1b3a32 0%, #245a4a 100%);"></div>
-                    <div class="ways-card__content">
-                        <div class="ways-card__header">
-                            <h3 class="ways-card__title">Youth Programs</h3>
-                            <p class="ways-card__subtitle">Develop the next generation</p>
-                        </div>
-                        <ul class="ways-card__list">
-                            <li class="ways-card__list-item">School chess clubs & after-school programs</li>
-                            <li class="ways-card__list-item">Scholarships for talented young players</li>
-                            <li class="ways-card__list-item">Mentorship from experienced players</li>
-                            <li class="ways-card__list-item">Pathway to national & international competitions</li>
-                            <li class="ways-card__list-item">Free introductory sessions for schools</li>
-                        </ul>
-                        <a href="#" class="ways-card__cta">Explore Youth Programs <span
-                                class="ways-card__cta-icon">→</span></a>
-                    </div>
-                </div>
-            </div>
+        <div class="trust__stat">
+          <span class="trust__stat-num">2,500+</span>
+          <span class="trust__stat-lbl">Weekly Students</span>
         </div>
-    </section>
-
-    <!-- Tournaments Section -->
-    <section class="section" id="tournaments">
-        <div class="container">
-            <div class="section__header reveal">
-                <h2>Upcoming Tournaments</h2>
-                <div class="section__divider"></div>
-                <p>Browse our calendar of events. From rapid opens to classical championships — there is a board waiting
-                    for you.</p>
-            </div>
-            <div class="tournament-tabs reveal" id="tournamentTabs">
-                <button class="tournament-tab active" data-filter="all">All Events</button>
-                <button class="tournament-tab" data-filter="rapid">Rapid</button>
-                <button class="tournament-tab" data-filter="blitz">Blitz</button>
-                <button class="tournament-tab" data-filter="classical">Classical</button>
-                <button class="tournament-tab" data-filter="junior">Junior</button>
-            </div>
-            <div class="tournament-grid" id="tournamentGrid"></div>
+        <div class="trust__stat">
+          <span class="trust__stat-num">10,000+</span>
+          <span class="trust__stat-lbl">Community Impact</span>
         </div>
-    </section>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <!-- Registration Section -->
-    <section class="section section--alt" id="register">
-        <div class="container">
-            <div class="section__header reveal">
-                <h2>Tournament Registration</h2>
-                <div class="section__divider"></div>
-                <p>Complete the form below to register for an upcoming Jumuiya Chess tournament. Fields marked with *
-                    are required.</p>
-            </div>
-            <div class="registration-layout">
-                <div class="registration-info reveal">
-                    <h3>Why Register Early?</h3>
-                    <ul class="registration-info__list">
-                        <li>Secure your spot — places are limited per section</li>
-                        <li>Early-bird entry fee discounts available</li>
-                        <li>Receive pairing information 48 hours before Round 1</li>
-                        <li>Get access to pre-tournament training materials</li>
-                        <li>Automatic inclusion in our rating database</li>
-                        <li>Eligibility for all prize categories</li>
-                    </ul>
-                    <div class="registration-info__note">⚠️ <strong>Important:</strong> Your registration is not
-                        confirmed until payment is received. You will receive a confirmation email within 24 hours. For
-                        assistance, contact <strong>register@jumuiyachess.co.ke</strong></div>
-                </div>
-                <div class="form-card reveal" id="registrationFormCard">
-                    <h3>Player Registration</h3>
-                    <p class="form-card__subtitle">Fill in your details to register</p>
-                    <form id="registrationForm" novalidate>
-                        <div class="form-row">
-                            <div class="form-group"><label for="firstName">First Name <span
-                                        class="required">*</span></label><input type="text" id="firstName" required
-                                    placeholder="e.g. Mary"><span class="error-msg" id="firstNameError">Please enter
-                                    your first name.</span></div>
-                            <div class="form-group"><label for="lastName">Last Name <span
-                                        class="required">*</span></label><input type="text" id="lastName" required
-                                    placeholder="e.g. Wanjiku"><span class="error-msg" id="lastNameError">Please enter
-                                    your last name.</span></div>
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group"><label for="email">Email Address <span
-                                        class="required">*</span></label><input type="email" id="email" required
-                                    placeholder="you@example.com"><span class="error-msg" id="emailError">Please enter a
-                                    valid email.</span></div>
-                            <div class="form-group"><label for="phone">Phone / WhatsApp <span
-                                        class="required">*</span></label><input type="tel" id="phone" required
-                                    placeholder="+254 7XX XXX XXX"><span class="error-msg" id="phoneError">Please enter
-                                    a valid phone number.</span></div>
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group"><label for="fideId">FIDE ID (optional)</label><input type="text"
-                                    id="fideId" placeholder="e.g. 10800000"></div>
-                            <div class="form-group"><label for="nationalRating">National Rating (optional)</label><input
-                                    type="text" id="nationalRating" placeholder="e.g. 1850"></div>
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group"><label for="federation">Chess Federation <span
-                                        class="required">*</span></label><select id="federation" required>
-                                    <option value="">Select Federation</option>
-                                    <option value="KEN">Kenya (KEN)</option>
-                                    <option value="UGA">Uganda (UGA)</option>
-                                    <option value="TAN">Tanzania (TAN)</option>
-                                    <option value="other">Other</option>
-                                </select><span class="error-msg" id="federationError">Please select your
-                                    federation.</span></div>
-                            <div class="form-group"><label for="club">Club / Organisation</label><input type="text"
-                                    id="club" placeholder="e.g. Nairobi Chess Club"></div>
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group"><label for="tournamentSelect">Tournament <span
-                                        class="required">*</span></label><select id="tournamentSelect" required>
-                                    <option value="">Select Tournament</option>
-                                    <option value="jumuiya-rapid-open-2026">Jumuiya Rapid Open — June 2026</option>
-                                    <option value="kenya-junior-champs-2026">Kenya Junior Championships — July 2026
-                                    </option>
-                                </select><span class="error-msg" id="tournamentSelectError">Please select a
-                                    tournament.</span></div>
-                            <div class="form-group"><label for="section">Section / Category <span
-                                        class="required">*</span></label><select id="section" required>
-                                    <option value="">Select Section</option>
-                                    <option value="open">Open</option>
-                                    <option value="u18">Under 18</option>
-                                    <option value="u14">Under 14</option>
-                                </select><span class="error-msg" id="sectionError">Please select a section.</span></div>
-                        </div>
-                        <div class="form-group"><label for="paymentMethod">Payment Method <span
-                                    class="required">*</span></label><select id="paymentMethod" required>
-                                <option value="">Select Payment Method</option>
-                                <option value="mpesa">M-Pesa</option>
-                                <option value="bank">Bank Transfer</option>
-                            </select><span class="error-msg" id="paymentMethodError">Please select a payment
-                                method.</span></div>
-                        <div class="form-group"><label for="notes">Special Requirements / Notes</label><textarea
-                                id="notes" rows="3"
-                                placeholder="Any dietary requirements, accessibility needs..."></textarea></div>
-                        <div class="form-checkbox"><input type="checkbox" id="terms" required><label for="terms">I agree
-                                to the tournament regulations and code of conduct. <span
-                                    class="required">*</span></label></div>
-                        <span class="error-msg" id="termsError" style="margin-left:1.5rem;">You must agree to the
-                            terms.</span>
-                        <div class="form-submit-row"><button type="submit" class="btn btn--primary btn--lg">Complete
-                                Registration</button></div>
-                    </form>
-                    <div class="form-success" id="formSuccess">
-                        <div class="form-success__icon">🎉</div>
-                        <h3>Registration Submitted!</h3>
-                        <p>Check your email for confirmation. We look forward to seeing you at the board!</p><button
-                            class="btn btn--secondary" id="resetFormBtn">Register Another Player</button>
-                    </div>
-                </div>
-            </div>
+<!-- ── INTEREST FORM ──────────────────────────────────── -->
+<section class="interest">
+  <div class="container">
+    <div class="interest__card reveal">
+      <div class="interest__label">I am interested in… <span style="color:#c0392b">*</span></div>
+      <div class="interest__tabs">
+        <button class="interest__tab active" data-opt="adult">Adult Options</button>
+        <button class="interest__tab" data-opt="youth">Youth Options</button>
+      </div>
+      <select class="interest__sel" id="iSelect">
+        <option value="">Choose an option.</option>
+        <option value="tournaments">Tournament Participation</option>
+        <option value="coaching">Coaching &amp; Training</option>
+        <option value="club">Join a Club</option>
+        <option value="casual">Casual Play</option>
+      </select>
+      <div class="interest__error" id="iErr">⚠ Please choose an option first.</div>
+      <div class="interest__email-wrap" id="iEmailWrap">
+        <input type="email" class="interest__email-input" id="iEmail" placeholder="Your email address">
+        <div class="interest__error" id="iEmailErr" style="margin-top:.38rem">⚠ Please enter a valid email.</div>
+      </div>
+      <div class="interest__actions">
+        <button class="btn btn--forest btn--sm" id="iNext">Next</button>
+        <button class="btn btn--gold btn--sm" id="iSubmit" style="display:none">Submit</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── ABOUT ──────────────────────────────────────────── -->
+<section class="section section--white" id="about">
+  <div class="container">
+    <div class="about__grid">
+      <div class="about__imagery reveal">
+        <div class="about__img-main">
+          <img src="https://i.pinimg.com/1200x/2c/1f/63/2c1f63d4681426cae723cda7040bd737.jpg" alt="Jumuiya community" loading="lazy">
         </div>
-    </section>
-
-    <!-- News Section -->
-    <section class="section" id="news">
-        <div class="container">
-            <div class="section__header reveal">
-                <h2>Latest News & Stories</h2>
-                <div class="section__divider"></div>
-                <p>Updates from the Jumuiya Chess community.</p>
-            </div>
-            <div class="news-grid" id="newsGrid"></div>
+        <div class="about__chip">♛<small>Est. Nairobi</small></div>
+        <div class="about__img-accent">
+          <img src="https://i.pinimg.com/736x/c4/ca/82/c4ca820351eff4ceca338c2226fbc352.jpg" alt="Competition" loading="lazy">
         </div>
-    </section>
-
-    <!-- CTA Banner -->
-    <section class="section">
-        <div class="container">
-            <div class="cta-banner reveal">
-                <h2>Ready to Make Your Move?</h2>
-                <p>Join over 1,200 players across Kenya. Your next tournament awaits.</p>
-                <div class="cta-banner__actions"><a href="#register" class="btn btn--primary btn--lg">Register Now</a><a
-                        href="#tournaments" class="btn btn--outline-light btn--lg">Browse Events</a></div>
-            </div>
+      </div>
+      <div class="about__text reveal rd1">
+        <div class="section__eyebrow">Our Mission</div>
+        <h2 class="section__title">More Than a Game —<br>A Movement</h2>
+        <div class="divider"></div>
+        <p><em>Jumuiya</em> — Swahili for "community" — embodies our core belief: chess is best experienced together. Founded in Nairobi, we have grown into a nationwide network connecting players, coaches, and enthusiasts of every background.</p>
+        <p>From beginner workshops in rural schools to FIDE-rated open championships, we celebrate every mind that dares to sit across the board.</p>
+        <div class="about__pillars">
+          <div class="about__pillar"><div class="about__pillar-icon">🎯</div><h4>Competitive Excellence</h4><p>FIDE-rated events &amp; national pathways</p></div>
+          <div class="about__pillar"><div class="about__pillar-icon">🌱</div><h4>Grassroots Development</h4><p>School &amp; community programmes</p></div>
+          <div class="about__pillar"><div class="about__pillar-icon">🤝</div><h4>Inclusive Community</h4><p>All ages, genders &amp; abilities</p></div>
+          <div class="about__pillar"><div class="about__pillar-icon">🌍</div><h4>Pan-African Vision</h4><p>Connecting players across East Africa</p></div>
         </div>
-    </section>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer__grid">
-                <div>
-                    <div class="footer__brand">♞ Jumuiya Chess</div>
-                    <p class="footer__desc">Kenya's premier chess community organisation.</p>
-                </div>
-                <div>
-                    <h4>Quick Links</h4>
-                    <ul>
-                        <li><a href="#home">Home</a></li>
-                        <li><a href="#about">About</a></li>
-                        <li><a href="#tournaments">Tournaments</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4>Connect</h4>
-                    <ul>
-                        <li><a href="#">Facebook</a></li>
-                        <li><a href="#">Twitter</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4>Contact</h4>
-                    <ul>
-                        <li>info@jumuiyachess.co.ke</li>
-                        <li>Nairobi, Kenya</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="footer__bottom"><span>&copy; 2026 Jumuiya Chess.</span><span>Built for the Kenyan chess
-                    community</span></div>
+<!-- ── WAYS TO GET INVOLVED ───────────────────────────── -->
+<section class="section section--sand" id="get-involved">
+  <div class="container">
+    <div class="section__header reveal">
+      <div class="section__eyebrow">Programs</div>
+      <h2 class="section__title">Ways to Get Involved</h2>
+      <div class="divider"></div>
+      <p class="section__sub">Whether you're picking up a piece for the first time or eyeing a national title, there's a place for you in the Jumuiya community.</p>
+    </div>
+    <div class="ways__grid">
+      <div class="way-card reveal">
+        <div class="way-card__bg" style="background-image:url('https://i.pinimg.com/1200x/c8/e8/fb/c8e8fb1e14acb11634df0b53ad2c0e06.jpg')"></div>
+        <div class="way-card__overlay"></div>
+        <div class="way-card__body">
+          <span class="way-card__tag">Training</span>
+          <h3 class="way-card__title">Coaching &amp; Classes</h3>
+          <p class="way-card__desc">Beginner to master — in-person &amp; online, with FIDE-certified coaches.</p>
+          <a href="#" class="way-card__arrow">Learn More →</a>
         </div>
-    </footer>
+      </div>
+      <div class="way-card reveal rd1">
+        <div class="way-card__bg" style="background-image:url('https://i.pinimg.com/736x/c4/ca/82/c4ca820351eff4ceca338c2226fbc352.jpg')"></div>
+        <div class="way-card__overlay"></div>
+        <div class="way-card__body">
+          <span class="way-card__tag">Compete</span>
+          <h3 class="way-card__title">Play &amp; Compete</h3>
+          <p class="way-card__desc">Events 7 days a week. Rapid, blitz, classical &amp; online formats.</p>
+          <a href="#tournaments" class="way-card__arrow">Browse Tournaments →</a>
+        </div>
+      </div>
+      <div class="way-card reveal rd1">
+        <div class="way-card__bg" style="background-image:url('https://i.pinimg.com/webp85/736x/94/81/03/9481035c7e22647d77978a5a2b97ba27.webp')"></div>
+        <div class="way-card__overlay"></div>
+        <div class="way-card__body">
+          <span class="way-card__tag">Community</span>
+          <h3 class="way-card__title">Connect</h3>
+          <p class="way-card__desc">Monthly meetups, club nights, WhatsApp groups &amp; exclusive resources.</p>
+          <a href="#" class="way-card__arrow">Join Community →</a>
+        </div>
+      </div>
+      <div class="way-card reveal rd2" style="background:linear-gradient(135deg,#1e5038,#0d1a14)">
+        <div class="way-card__overlay" style="background:linear-gradient(175deg,transparent 10%,rgba(13,26,20,.7) 100%)"></div>
+        <div class="way-card__body">
+          <span class="way-card__tag">Youth</span>
+          <h3 class="way-card__title">Youth Programs</h3>
+          <p class="way-card__desc">School clubs, scholarships &amp; pathways to international competition.</p>
+          <a href="#" class="way-card__arrow">Explore →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <button class="scroll-top" id="scrollTopBtn" aria-label="Scroll to top">↑</button>
-    <div class="toast" id="toast"></div>
+<!-- ── TOURNAMENTS ────────────────────────────────────── -->
+<section class="section section--white" id="tournaments">
+  <div class="container">
+    <div class="section__header section__header--center reveal">
+      <div class="section__eyebrow">Calendar</div>
+      <h2 class="section__title">Upcoming Tournaments</h2>
+      <div class="divider divider--center"></div>
+      <p class="section__sub">From rapid opens to classical championships — there is a board waiting for you.</p>
+    </div>
+    <div class="t-filter reveal" id="tFilter">
+      <button class="t-filter-btn active" data-f="all">All Events</button>
+      <button class="t-filter-btn" data-f="rapid">Rapid</button>
+      <button class="t-filter-btn" data-f="blitz">Blitz</button>
+      <button class="t-filter-btn" data-f="classical">Classical</button>
+      <button class="t-filter-btn" data-f="junior">Junior</button>
+    </div>
+    <div class="t-grid" id="tGrid"></div>
+  </div>
+</section>
 
-    <script>
-        (function () {
-            const nav = document.getElementById('nav');
-            const navHamburger = document.getElementById('navHamburger');
-            const navMobileMenu = document.getElementById('navMobileMenu');
-            const scrollTopBtn = document.getElementById('scrollTopBtn');
-            const tournamentGrid = document.getElementById('tournamentGrid');
-            const tournamentTabs = document.getElementById('tournamentTabs');
-            const newsGrid = document.getElementById('newsGrid');
-            const registrationForm = document.getElementById('registrationForm');
-            const formSuccess = document.getElementById('formSuccess');
-            const resetFormBtn = document.getElementById('resetFormBtn');
-            const toast = document.getElementById('toast');
+<!-- ── REGISTRATION ───────────────────────────────────── -->
+<section class="section section--sand" id="register">
+  <div class="container">
+    <div class="section__header section__header--center reveal">
+      <div class="section__eyebrow">Registration</div>
+      <h2 class="section__title">Tournament Registration</h2>
+      <div class="divider divider--center"></div>
+      <p class="section__sub">Complete the form below to enter an upcoming event. Fields marked * are required.</p>
+    </div>
+    <div class="reg-layout">
+      <aside class="reg-sidebar reveal">
+        <h3>Why Register Early?</h3>
+        <ul class="reg-sidebar__list">
+          <li>Secure your spot — places are limited per section</li>
+          <li>Early-bird entry fee discounts available</li>
+          <li>Receive pairing info 48 hrs before Round 1</li>
+          <li>Pre-tournament training materials included</li>
+          <li>Automatic inclusion in rating database</li>
+          <li>Eligibility for all prize categories</li>
+        </ul>
+        <div class="reg-sidebar__note">⚠️ Registration is not confirmed until payment is received. Confirmation email arrives within 24 hours.</div>
+        <div class="reg-sidebar__contact">✉ register@jumuiyachess.co.ke</div>
+      </aside>
+      <div class="form-card reveal rd1" id="formCard">
+        <h3>Player Registration</h3>
+        <p class="form-card__sub">Fill in your details to complete your entry</p>
+        <form id="regForm" novalidate>
+          <div class="fsect">Personal Details</div>
+          <div class="f-row">
+            <div class="f-grp"><label for="fName">First Name <span class="req">*</span></label><input type="text" id="fName" placeholder="e.g. Mary"><div class="f-err" id="fNameErr">Please enter your first name.</div></div>
+            <div class="f-grp"><label for="lName">Last Name <span class="req">*</span></label><input type="text" id="lName" placeholder="e.g. Wanjiku"><div class="f-err" id="lNameErr">Please enter your last name.</div></div>
+          </div>
+          <div class="f-row">
+            <div class="f-grp"><label for="fEmail">Email <span class="req">*</span></label><input type="email" id="fEmail" placeholder="you@example.com"><div class="f-err" id="fEmailErr">Please enter a valid email.</div></div>
+            <div class="f-grp"><label for="fPhone">Phone / WhatsApp <span class="req">*</span></label><input type="tel" id="fPhone" placeholder="+254 7XX XXX XXX"><div class="f-err" id="fPhoneErr">Please enter a valid phone number.</div></div>
+          </div>
+          <div class="f-row">
+            <div class="f-grp"><label for="fDob">Date of Birth <span class="req">*</span></label><input type="date" id="fDob"><div class="f-err" id="fDobErr">Please enter your date of birth.</div></div>
+            <div class="f-grp"><label for="fGender">Gender <span class="req">*</span></label><select id="fGender"><option value="">Select</option><option>Male</option><option>Female</option><option>Prefer not to say</option></select><div class="f-err" id="fGenderErr">Please select your gender.</div></div>
+          </div>
+          <div class="f-row">
+            <div class="f-grp"><label for="fNat">Nationality <span class="req">*</span></label><select id="fNat"><option value="">Select</option><option>Kenyan</option><option>Ugandan</option><option>Tanzanian</option><option>Other</option></select><div class="f-err" id="fNatErr">Please select your nationality.</div></div>
+            <div class="f-grp"><label for="fCity">City / Town <span class="req">*</span></label><input type="text" id="fCity" placeholder="e.g. Nairobi"><div class="f-err" id="fCityErr">Please enter your city.</div></div>
+          </div>
+          <div class="fsect">Chess Details</div>
+          <div class="f-row">
+            <div class="f-grp"><label for="fFide">FIDE ID <span style="color:var(--slate);font-weight:400">(optional)</span></label><input type="text" id="fFide" placeholder="e.g. 10800000"></div>
+            <div class="f-grp"><label for="fRating">National Rating <span style="color:var(--slate);font-weight:400">(optional)</span></label><input type="text" id="fRating" placeholder="e.g. 1850"></div>
+          </div>
+          <div class="f-row">
+            <div class="f-grp"><label for="fFed">Federation <span class="req">*</span></label><select id="fFed"><option value="">Select</option><option value="KEN">Kenya (KEN)</option><option value="UGA">Uganda (UGA)</option><option value="TAN">Tanzania (TAN)</option><option value="other">Other</option></select><div class="f-err" id="fFedErr">Please select your federation.</div></div>
+            <div class="f-grp"><label for="fClub">Club / Organisation</label><input type="text" id="fClub" placeholder="e.g. Nairobi Chess Club"></div>
+          </div>
+          <div class="fsect">Event Selection</div>
+          <div class="f-row">
+            <div class="f-grp"><label for="fTour">Tournament <span class="req">*</span></label><select id="fTour"><option value="">Select Tournament</option><option value="jro">Jumuiya Rapid Open — June 2026</option><option value="kjc">Kenya Junior Championships — July 2026</option><option value="nci">Nairobi Classical Invitational — Aug 2026</option><option value="eab">East Africa Blitz — Sept 2026</option></select><div class="f-err" id="fTourErr">Please select a tournament.</div></div>
+            <div class="f-grp"><label for="fSec">Section <span class="req">*</span></label><select id="fSec"><option value="">Select Section</option><option value="open">Open</option><option value="u18">Under 18</option><option value="u14">Under 14</option><option value="u10">Under 10</option><option value="ladies">Ladies</option></select><div class="f-err" id="fSecErr">Please select a section.</div></div>
+          </div>
+          <div class="fsect">Payment</div>
+          <div class="f-grp"><label for="fPay">Payment Method <span class="req">*</span></label><select id="fPay"><option value="">Select Payment Method</option><option value="mpesa">M-Pesa</option><option value="bank">Bank Transfer</option><option value="cash">Cash (in-person)</option></select><div class="f-err" id="fPayErr">Please select a payment method.</div></div>
+          <div class="f-grp"><label for="fNotes">Special Requirements / Notes</label><textarea id="fNotes" rows="3" placeholder="Dietary requirements, accessibility needs, questions…"></textarea></div>
+          <div class="f-check"><input type="checkbox" id="fTerms"><label for="fTerms">I agree to the tournament regulations and code of conduct. <span class="req">*</span></label></div>
+          <div class="f-err" id="fTermsErr" style="margin-left:1.55rem">You must agree to the terms.</div>
+          <div class="form-footer"><button type="submit" class="btn btn--gold btn--lg">Complete Registration</button></div>
+        </form>
+        <div class="form-success" id="fSuccess">
+          <div class="form-success__icon">🎉</div>
+          <h3>Registration Submitted!</h3>
+          <p>Check your email for confirmation. We look forward to seeing you at the board!</p>
+          <button class="btn btn--outline" id="fReset" style="margin-top:1rem">Register Another Player</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-            const tournaments = [
-                { id: 1, title: 'Jumuiya Rapid Open', format: 'Rapid — 15+10', date: '14 June 2026', time: '9:00 AM EAT', venue: 'Nairobi Chess Club', entryFee: 'KES 800', prizeFund: 'KES 45,000', status: 'open', category: 'rapid', badge: 'Open', badgeClass: 'badge--open' },
-                { id: 2, title: 'Kenya Junior Championships', format: 'Classical — 60+30', date: '5–7 July 2026', time: '8:30 AM', venue: 'Braeburn School', entryFee: 'KES 500', prizeFund: 'KES 30,000', status: 'open', category: 'junior', badge: 'Open', badgeClass: 'badge--open' },
-                { id: 3, title: 'Nairobi Classical Invitational', format: 'Classical — 90+30', date: '16–20 Aug 2026', time: '10:00 AM', venue: 'Sarova Stanley', entryFee: 'KES 2,000', prizeFund: 'KES 150,000', status: 'soon', category: 'classical', badge: 'Soon', badgeClass: 'badge--soon' },
-                { id: 4, title: 'East Africa Blitz', format: 'Blitz — 3+2', date: '13 Sept 2026', time: '2:00 PM', venue: 'KICC Nairobi', entryFee: 'KES 1,000', prizeFund: 'KES 80,000', status: 'open', category: 'blitz', badge: 'Open', badgeClass: 'badge--open' },
-                { id: 5, title: 'Friday Night Blitz', format: 'Blitz — 5+0', date: 'Every Friday', time: '7:00 PM', venue: 'lichess.org', entryFee: 'Free', prizeFund: 'Monthly Prize', status: 'open', category: 'blitz', badge: 'Weekly', badgeClass: 'badge--open' },
-            ];
+<!-- ── NEWS ───────────────────────────────────────────── -->
+<section class="section section--white" id="news">
+  <div class="container">
+    <div class="section__header reveal">
+      <div class="section__eyebrow">Community</div>
+      <h2 class="section__title">Latest News &amp; Stories</h2>
+      <div class="divider"></div>
+    </div>
+    <div class="news-grid" id="newsGrid"></div>
+  </div>
+</section>
 
-            const newsArticles = [
-                { id: 1, tag: 'Community', title: 'Celebrating Minds of All Kinds', excerpt: 'Our outreach programme has reached over 15 schools in rural Kenya.', date: '22 April 2026', imageEmoji: '🌍' },
-                { id: 2, tag: 'Tournament', title: 'Wanjiku Claims Top Honours', excerpt: 'Mary Wanjiku emerged victorious in a thrilling tiebreak.', date: '10 March 2026', imageEmoji: '🏆' },
-                { id: 3, tag: 'Training', title: 'New U14 Programme Launches', excerpt: 'A nationwide training initiative for young talent.', date: '28 Feb 2026', imageEmoji: '📚' },
-            ];
+<!-- ── CTA BAND ───────────────────────────────────────── -->
+<section class="cta-band">
+  <div class="cta-band__board"></div>
+  <div class="cta-band__glow"></div>
+  <div class="container">
+    <div class="cta-band__inner reveal">
+      <h2 class="cta-band__title">Ready to Make<br><em>Your Move?</em></h2>
+      <p class="cta-band__sub">Join over 1,500 players across Kenya. Your next tournament awaits.</p>
+      <div class="cta-band__actions">
+        <a href="#register" class="btn btn--gold btn--lg">Register Now</a>
+        <a href="#tournaments" class="btn btn--ghost btn--lg">Browse Events</a>
+      </div>
+    </div>
+  </div>
+</section>
 
-            function renderTournaments(filter = 'all') {
-                const filtered = filter === 'all' ? tournaments : tournaments.filter(t => t.category === filter);
-                tournamentGrid.innerHTML = filtered.map(t => `
-                <div class="tournament-card reveal">
-                    <div class="tournament-card__header">
-                        <span class="tournament-card__badge ${t.badgeClass}">${t.badge}</span>
-                        <h3>${t.title}</h3><span class="tournament-card__format">${t.format}</span>
-                    </div>
-                    <div class="tournament-card__body">
-                        <div class="tournament-card__detail"><span>📅</span> ${t.date}</div>
-                        <div class="tournament-card__detail"><span>🕐</span> ${t.time}</div>
-                        <div class="tournament-card__detail"><span>📍</span> ${t.venue}</div>
-                        <div class="tournament-card__detail"><span>💰</span> Entry: ${t.entryFee} | Prizes: ${t.prizeFund}</div>
-                    </div>
-                    <div class="tournament-card__footer">
-                        <a href="#register" class="btn btn--primary btn--sm">Register</a>
-                        <a href="#" class="btn btn--secondary btn--sm">Details</a>
-                    </div>
-                </div>`).join('');
-                setTimeout(observeReveal, 100);
-            }
+<!-- ── FOOTER ─────────────────────────────────────────── -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer__grid">
+      <div>
+        <div class="footer__brand"><span class="footer__brand-mark">♞</span>Jumuiya Chess</div>
+        <p class="footer__desc">Kenya's premier chess community — building minds, one move at a time.</p>
+        <div class="footer__social">
+          <a href="#" title="Facebook">f</a><a href="#" title="Twitter">𝕏</a>
+          <a href="#" title="Instagram">◈</a><a href="#" title="WhatsApp">✆</a>
+        </div>
+      </div>
+      <div class="footer__col"><h4>Quick Links</h4><ul>
+        <li><a href="#home">Home</a></li><li><a href="#about">About</a></li>
+        <li><a href="#tournaments">Tournaments</a></li><li><a href="#register">Register</a></li>
+        <li><a href="#news">News</a></li>
+      </ul></div>
+      <div class="footer__col"><h4>Programs</h4><ul>
+        <li><a href="#get-involved">Coaching &amp; Classes</a></li>
+        <li><a href="#get-involved">Youth Programs</a></li>
+        <li><a href="#get-involved">School Clubs</a></li>
+        <li><a href="#get-involved">Online Learning</a></li>
+      </ul></div>
+      <div class="footer__col"><h4>Contact</h4><ul>
+        <li><a href="mailto:info@jumuiyachess.co.ke">info@jumuiyachess.co.ke</a></li>
+        <li><a href="mailto:register@jumuiyachess.co.ke">register@jumuiyachess.co.ke</a></li>
+        <li>Nairobi, Kenya</li>
+      </ul></div>
+    </div>
+    <div class="footer__bottom">
+      <span>&copy; 2026 Jumuiya Chess. All rights reserved.</span>
+      <span>Built for the Kenyan chess community</span>
+    </div>
+  </div>
+</footer>
 
-            function renderNews() {
-                newsGrid.innerHTML = newsArticles.map(a => `
-                <article class="news-card reveal">
-                    <div class="news-card__image"><span class="news-card__image-placeholder">${a.imageEmoji}</span><div class="news-card__image-overlay"><span class="news-card__date">${a.date}</span></div></div>
-                    <div class="news-card__body"><span class="news-card__tag">${a.tag}</span><h3>${a.title}</h3><p class="news-card__excerpt">${a.excerpt}</p><a href="#" class="news-card__link">Read More →</a></div>
-                </article>`).join('');
-                setTimeout(observeReveal, 100);
-            }
+<button class="stb" id="stb" aria-label="Scroll to top">↑</button>
+<div class="toast" id="toast"></div>
 
-            tournamentTabs.addEventListener('click', function (e) {
-                if (e.target.classList.contains('tournament-tab')) {
-                    document.querySelectorAll('.tournament-tab').forEach(b => b.classList.remove('active'));
-                    e.target.classList.add('active');
-                    renderTournaments(e.target.dataset.filter);
-                }
-            });
+<script>
+/* ─── DATA ─────────────────────────────────────────────── */
+const T=[
+  {name:'Jumuiya Rapid Open',fmt:'Rapid — 15+10',date:'14 June 2026',time:'9:00 AM EAT',venue:'Nairobi Chess Club',fee:'KES 800',prize:'KES 45,000',status:'open',cat:'rapid',badge:'Open',bc:'t-badge--open',stripe:'stripe-open'},
+  {name:'Kenya Junior Championships',fmt:'Classical — 60+30',date:'5–7 July 2026',time:'8:30 AM',venue:'Braeburn School',fee:'KES 500',prize:'KES 30,000',status:'open',cat:'junior',badge:'Open',bc:'t-badge--open',stripe:'stripe-open'},
+  {name:'Nairobi Classical Invitational',fmt:'Classical — 90+30',date:'16–20 Aug 2026',time:'10:00 AM',venue:'Sarova Stanley',fee:'KES 2,000',prize:'KES 150,000',status:'soon',cat:'classical',badge:'Coming Soon',bc:'t-badge--soon',stripe:'stripe-soon'},
+  {name:'East Africa Blitz',fmt:'Blitz — 3+2',date:'13 Sept 2026',time:'2:00 PM',venue:'KICC, Nairobi',fee:'KES 1,000',prize:'KES 80,000',status:'open',cat:'blitz',badge:'Open',bc:'t-badge--open',stripe:'stripe-open'},
+  {name:'Friday Night Blitz',fmt:'Blitz — 5+0',date:'Every Friday',time:'7:00 PM',venue:'lichess.org',fee:'Free',prize:'Monthly Prize',status:'weekly',cat:'blitz',badge:'Weekly',bc:'t-badge--weekly',stripe:'stripe-weekly'},
+];
+const NEWS=[
+  {tag:'Community',title:'Celebrating Minds of All Kinds',excerpt:'Our outreach programme has now reached over 15 schools in rural Kenya, introducing chess to hundreds of first-time players.',date:'22 Apr 2026',emoji:'🌍'},
+  {tag:'Tournament',title:'Wanjiku Claims Top Honours',excerpt:'Mary Wanjiku emerged victorious in a thrilling tiebreak at the Nairobi Invitational, clinching the title with a brilliant endgame.',date:'10 Mar 2026',emoji:'🏆'},
+  {tag:'Training',title:'New U14 Programme Launches',excerpt:'A nationwide training initiative for young talent is now underway, with coaches visiting 12 counties in the first quarter.',date:'28 Feb 2026',emoji:'📚'},
+];
+const ADULT=[{v:'tournaments',l:'Tournament Participation'},{v:'coaching',l:'Coaching & Training'},{v:'club',l:'Join a Club'},{v:'casual',l:'Casual Play'}];
+const YOUTH=[{v:'junior',l:'Junior Tournaments'},{v:'school',l:'School Program'},{v:'youth-coaching',l:'Youth Coaching'},{v:'online',l:'Online Learning'}];
 
-            function showError(fid, eid) { document.getElementById(fid).classList.add('error'); document.getElementById(eid).classList.add('visible'); }
-            function clearError(fid, eid) { document.getElementById(fid).classList.remove('error'); document.getElementById(eid).classList.remove('visible'); }
-            function validateForm() {
-                let valid = true;
-                document.querySelectorAll('.form-group input.error, .form-group select.error').forEach(e => e.classList.remove('error'));
-                document.querySelectorAll('.error-msg.visible').forEach(e => e.classList.remove('visible'));
-                document.getElementById('termsError').classList.remove('visible');
-                if (!document.getElementById('firstName').value.trim()) { showError('firstName', 'firstNameError'); valid = false; }
-                if (!document.getElementById('lastName').value.trim()) { showError('lastName', 'lastNameError'); valid = false; }
-                if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(document.getElementById('email').value.trim())) { showError('email', 'emailError'); valid = false; }
-                if (document.getElementById('phone').value.trim().length < 10) { showError('phone', 'phoneError'); valid = false; }
-                if (!document.getElementById('federation').value) { showError('federation', 'federationError'); valid = false; }
-                if (!document.getElementById('tournamentSelect').value) { showError('tournamentSelect', 'tournamentSelectError'); valid = false; }
-                if (!document.getElementById('section').value) { showError('section', 'sectionError'); valid = false; }
-                if (!document.getElementById('paymentMethod').value) { showError('paymentMethod', 'paymentMethodError'); valid = false; }
-                if (!document.getElementById('terms').checked) { document.getElementById('termsError').classList.add('visible'); valid = false; }
-                return valid;
-            }
+/* ─── RENDER TOURNAMENTS ───────────────────────────────── */
+function renderT(f='all'){
+  const g=document.getElementById('tGrid');
+  const list=f==='all'?T:T.filter(t=>t.cat===f);
+  g.innerHTML=list.map(t=>`<div class="t-card reveal">
+    <div class="t-card__stripe ${t.stripe}"></div>
+    <div class="t-card__head">
+      <span class="t-badge ${t.bc}">${t.badge}</span>
+      <h3 class="t-card__name">${t.name}</h3>
+      <div class="t-card__format">${t.fmt}</div>
+    </div>
+    <div class="t-card__body">
+      <div class="t-card__row"><span class="t-card__icon">📅</span>${t.date}</div>
+      <div class="t-card__row"><span class="t-card__icon">🕐</span>${t.time}</div>
+      <div class="t-card__row"><span class="t-card__icon">📍</span>${t.venue}</div>
+      <span class="t-card__prize">🏅 Prize Fund: ${t.prize}</span>
+    </div>
+    <div class="t-card__foot">
+      <a href="#register" class="btn btn--gold btn--sm">Register — ${t.fee}</a>
+      <a href="#" class="btn btn--outline btn--sm">Details</a>
+    </div>
+  </div>`).join('');
+  setTimeout(initReveal,50);
+}
+document.getElementById('tFilter').addEventListener('click',e=>{
+  if(!e.target.classList.contains('t-filter-btn'))return;
+  document.querySelectorAll('.t-filter-btn').forEach(b=>b.classList.remove('active'));
+  e.target.classList.add('active');
+  renderT(e.target.dataset.f);
+});
 
-            registrationForm.addEventListener('submit', function (e) {
-                e.preventDefault();
-                if (validateForm()) {
-                    registrationForm.style.display = 'none';
-                    formSuccess.classList.add('visible');
-                    showToast('Registration submitted successfully! 🎉', 'success');
-                } else {
-                    showToast('Please fix the errors in the form.', '');
-                }
-            });
-            resetFormBtn.addEventListener('click', function () {
-                registrationForm.reset();
-                registrationForm.style.display = 'block';
-                formSuccess.classList.remove('visible');
-            });
-            function showToast(msg, type = '') { toast.textContent = msg; toast.className = 'toast ' + type + ' show'; clearTimeout(toast._timeout); toast._timeout = setTimeout(() => toast.classList.remove('show'), 3500); }
+/* ─── RENDER NEWS ──────────────────────────────────────── */
+function renderNews(){
+  document.getElementById('newsGrid').innerHTML=NEWS.map(n=>`<article class="news-card reveal">
+    <div class="news-card__img">${n.emoji}<span class="news-card__date">${n.date}</span></div>
+    <div class="news-card__body">
+      <div class="news-card__tag">${n.tag}</div>
+      <h3 class="news-card__title">${n.title}</h3>
+      <p class="news-card__excerpt">${n.excerpt}</p>
+      <a href="#" class="news-card__link">Read More →</a>
+    </div>
+  </article>`).join('');
+  setTimeout(initReveal,50);
+}
 
-            navHamburger.addEventListener('click', () => {
-                navMobileMenu.classList.toggle('open');
-                navHamburger.classList.toggle('active');
-                document.body.style.overflow = navMobileMenu.classList.contains('open') ? 'hidden' : '';
-            });
-            navMobileMenu.querySelectorAll('a').forEach(l => l.addEventListener('click', () => { navMobileMenu.classList.remove('open'); navHamburger.classList.remove('active'); document.body.style.overflow = ''; }));
+/* ─── INTEREST FORM ────────────────────────────────────── */
+const iSel=document.getElementById('iSelect'),
+  iErr=document.getElementById('iErr'),
+  iEW=document.getElementById('iEmailWrap'),
+  iEmail=document.getElementById('iEmail'),
+  iEErr=document.getElementById('iEmailErr'),
+  iNext=document.getElementById('iNext'),
+  iSub=document.getElementById('iSubmit');
+let iStep=1;
 
-            window.addEventListener('scroll', () => {
-                nav.classList.toggle('scrolled', window.scrollY > 60);
-                scrollTopBtn.classList.toggle('visible', window.scrollY > 500);
-            });
-            scrollTopBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+document.querySelectorAll('.interest__tab').forEach(t=>t.addEventListener('click',function(){
+  document.querySelectorAll('.interest__tab').forEach(x=>x.classList.remove('active'));
+  this.classList.add('active');
+  const opts=this.dataset.opt==='adult'?ADULT:YOUTH;
+  iSel.innerHTML='<option value="">Choose an option.</option>'+opts.map(o=>`<option value="${o.v}">${o.l}</option>`).join('');
+  iSel.value='';iErr.classList.remove('show');
+  iStep=1;iEW.classList.remove('show');
+  iNext.textContent='Next';iSub.style.display='none';
+}));
 
-            function observeReveal() {
-                document.querySelectorAll('.reveal:not(.visible)').forEach(el => {
-                    const obs = new IntersectionObserver((entries) => { entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } }) }, { threshold: 0.15 });
-                    obs.observe(el);
-                });
-            }
+iNext.addEventListener('click',()=>{
+  if(iStep===1){
+    if(!iSel.value){iErr.classList.add('show');return;}
+    iErr.classList.remove('show');iStep=2;iEW.classList.add('show');
+    iNext.textContent='Back';iEmail.focus();
+  }else{
+    iStep=1;iEW.classList.remove('show');
+    iNext.textContent='Next';iSub.style.display='none';iEErr.classList.remove('show');
+  }
+});
+iEmail.addEventListener('input',function(){
+  const v=this.value.trim(),ok=/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+  iEErr.classList.toggle('show',v&&!ok);
+  iSub.style.display=(v&&ok)?'inline-flex':'none';
+});
+iSub.addEventListener('click',()=>{
+  showToast(`Thanks! Check ${iEmail.value} for next steps ✓`);
+  setTimeout(()=>{
+    iSel.value='';iEmail.value='';iEErr.classList.remove('show');
+    iStep=1;iEW.classList.remove('show');
+    iNext.textContent='Next';iSub.style.display='none';
+  },1200);
+});
 
-            renderTournaments();
-            renderNews();
-            observeReveal();
-            if (window.scrollY > 60) nav.classList.add('scrolled');
+/* ─── REGISTRATION FORM ────────────────────────────────── */
+function sv(id){return document.getElementById(id).value.trim()}
+function se(fi,ei){document.getElementById(fi).classList.add('err');document.getElementById(ei).classList.add('show')}
+function clearE(){
+  document.querySelectorAll('.f-grp input.err,.f-grp select.err').forEach(e=>e.classList.remove('err'));
+  document.querySelectorAll('.f-err.show').forEach(e=>e.classList.remove('show'));
+}
+function validate(){
+  clearE();let ok=true;
+  if(!sv('fName')){se('fName','fNameErr');ok=false}
+  if(!sv('lName')){se('lName','lNameErr');ok=false}
+  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(sv('fEmail'))){se('fEmail','fEmailErr');ok=false}
+  if(sv('fPhone').replace(/\D/g,'').length<9){se('fPhone','fPhoneErr');ok=false}
+  if(!sv('fDob')){se('fDob','fDobErr');ok=false}
+  if(!sv('fGender')){se('fGender','fGenderErr');ok=false}
+  if(!sv('fNat')){se('fNat','fNatErr');ok=false}
+  if(!sv('fCity')){se('fCity','fCityErr');ok=false}
+  if(!sv('fFed')){se('fFed','fFedErr');ok=false}
+  if(!sv('fTour')){se('fTour','fTourErr');ok=false}
+  if(!sv('fSec')){se('fSec','fSecErr');ok=false}
+  if(!sv('fPay')){se('fPay','fPayErr');ok=false}
+  if(!document.getElementById('fTerms').checked){document.getElementById('fTermsErr').classList.add('show');ok=false}
+  return ok;
+}
+document.getElementById('regForm').addEventListener('submit',e=>{
+  e.preventDefault();
+  if(validate()){
+    document.getElementById('regForm').style.display='none';
+    document.getElementById('fSuccess').classList.add('show');
+    showToast('Registration submitted! 🎉');
+    window.scrollTo({top:document.getElementById('register').offsetTop-80,behavior:'smooth'});
+  }else{
+    showToast('Please fix the errors above.');
+    const first=document.querySelector('.f-err.show');
+    if(first)first.scrollIntoView({behavior:'smooth',block:'center'});
+  }
+});
+document.getElementById('fReset').addEventListener('click',()=>{
+  document.getElementById('regForm').reset();
+  document.getElementById('regForm').style.display='block';
+  document.getElementById('fSuccess').classList.remove('show');
+  clearE();
+});
 
-            // Trusted Section Form Functionality
-            const interestTabs = document.querySelectorAll('.trusted-form__tab');
-            const interestSelect = document.getElementById('interestSelect');
-            const nextBtn = document.getElementById('nextBtn');
-            const submitBtn = document.getElementById('submitBtn');
-            const errorMsg = document.getElementById('errorMsg');
-            const emailSection = document.getElementById('emailSection');
-            const emailInput = document.getElementById('emailInput');
-            const emailError = document.getElementById('emailError');
-            const emailErrorMsg = document.getElementById('emailErrorMsg');
+/* ─── NAV BURGER ────────────────────────────────────────── */
+const burger=document.getElementById('burger'),drawer=document.getElementById('drawer');
+burger.addEventListener('click',()=>{
+  const o=!drawer.classList.contains('open');
+  drawer.classList.toggle('open',o);burger.classList.toggle('open',o);
+  document.body.style.overflow=o?'hidden':'';
+});
+drawer.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{
+  drawer.classList.remove('open');burger.classList.remove('open');
+  document.body.style.overflow='';
+}));
 
-            let formStep = 1; // Track which step of the form we're on
+/* ─── SCROLL ────────────────────────────────────────────── */
+const navEl=document.getElementById('nav'),stbEl=document.getElementById('stb');
+window.addEventListener('scroll',()=>{
+  navEl.classList.toggle('scrolled',scrollY>40);
+  stbEl.classList.toggle('show',scrollY>500);
+},{passive:true});
+stbEl.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
 
-            const adultOptions = [
-                { value: 'tournaments', label: 'Tournament Participation' },
-                { value: 'coaching', label: 'Coaching & Training' },
-                { value: 'club', label: 'Join a Club' },
-                { value: 'casual', label: 'Casual Play' }
-            ];
+/* ─── TOAST ─────────────────────────────────────────────── */
+const toastEl=document.getElementById('toast');let tt;
+function showToast(m){
+  toastEl.textContent=m;toastEl.classList.add('show');
+  clearTimeout(tt);tt=setTimeout(()=>toastEl.classList.remove('show'),3500);
+}
 
-            const youthOptions = [
-                { value: 'junior-tournaments', label: 'Junior Tournaments' },
-                { value: 'school-program', label: 'School Program' },
-                { value: 'youth-coaching', label: 'Youth Coaching' },
-                { value: 'online-learning', label: 'Online Learning' }
-            ];
+/* ─── REVEAL ─────────────────────────────────────────────── */
+function initReveal(){
+  document.querySelectorAll('.reveal:not(.in)').forEach(el=>{
+    const o=new IntersectionObserver(entries=>{
+      entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');o.unobserve(e.target)}});
+    },{threshold:.1,rootMargin:'0px 0px -40px 0px'});
+    o.observe(el);
+  });
+}
 
-            interestTabs.forEach(tab => {
-                tab.addEventListener('click', function () {
-                    interestTabs.forEach(t => t.classList.remove('active'));
-                    this.classList.add('active');
-                    const optionType = this.dataset.option;
-                    const options = optionType === 'adult' ? adultOptions : youthOptions;
-                    interestSelect.innerHTML = '<option value="">Choose an option.</option>' + options.map(opt => `<option value="${opt.value}">${opt.label}</option>`).join('');
-                    interestSelect.value = '';
-                    errorMsg.style.display = 'none';
-                    // Reset form to step 1
-                    formStep = 1;
-                    emailSection.style.display = 'none';
-                    nextBtn.style.display = 'block';
-                    submitBtn.style.display = 'none';
-                    emailInput.value = '';
-                    emailError.style.display = 'none';
-                });
-            });
-
-            nextBtn.addEventListener('click', function () {
-                if (formStep === 1) {
-                    // Step 1: Validate interest selection
-                    if (!interestSelect.value) {
-                        errorMsg.style.display = 'flex';
-                    } else {
-                        errorMsg.style.display = 'none';
-                        // Move to step 2: Show email field
-                        formStep = 2;
-                        emailSection.style.display = 'block';
-                        nextBtn.textContent = 'Back';
-                        emailInput.focus();
-                    }
-                } else if (formStep === 2) {
-                    // Step 2: Go back to step 1
-                    formStep = 1;
-                    emailSection.style.display = 'none';
-                    nextBtn.textContent = 'Next';
-                    submitBtn.style.display = 'none';
-                    emailError.style.display = 'none';
-                }
-            });
-
-            // Email input validation
-            emailInput.addEventListener('input', function () {
-                const email = this.value.trim();
-                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-                if (email && emailRegex.test(email)) {
-                    emailError.style.display = 'none';
-                    submitBtn.style.display = 'block';
-                } else {
-                    if (email && !emailRegex.test(email)) {
-                        emailErrorMsg.textContent = 'Please enter a valid email.';
-                        emailError.style.display = 'flex';
-                    } else {
-                        emailError.style.display = 'none';
-                    }
-                    submitBtn.style.display = 'none';
-                }
-            });
-
-            // Submit button handler
-            submitBtn.addEventListener('click', function () {
-                const selectedTab = document.querySelector('.trusted-form__tab.active').dataset.option;
-                const selectedInterest = interestSelect.options[interestSelect.selectedIndex].text;
-                const email = emailInput.value.trim();
-
-                showToast(`Thank you! We've received your information. Check your email at ${email} for next steps.`, 'success');
-
-                // Reset form
-                setTimeout(() => {
-                    interestSelect.value = '';
-                    emailInput.value = '';
-                    emailError.style.display = 'none';
-                    formStep = 1;
-                    emailSection.style.display = 'none';
-                    nextBtn.textContent = 'Next';
-                    nextBtn.style.display = 'block';
-                    submitBtn.style.display = 'none';
-                }, 1500);
-            });
-        })();
-    </script>
+/* ─── INIT ───────────────────────────────────────────────── */
+renderT();renderNews();initReveal();
+if(scrollY>40)navEl.classList.add('scrolled');
+</script>
 </body>
-
 </html>
