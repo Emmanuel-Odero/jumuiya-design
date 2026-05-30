@@ -1348,6 +1348,75 @@
             cursor: pointer
         }
 
+        /* ─── CONSENT SECTION ─────────────────────────────────── */
+        .consent-box {
+            background: var(--gold-wash);
+            border: 1.5px solid rgba(200, 151, 62, .3);
+            border-radius: var(--r-md);
+            padding: 1.2rem;
+            margin-bottom: 1.2rem;
+            margin-top: 1.2rem
+        }
+
+        .consent-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
+            user-select: none
+        }
+
+        .consent-header:hover {
+            opacity: .85
+        }
+
+        .consent-title {
+            font-size: .88rem;
+            font-weight: 700;
+            color: var(--forest);
+            margin: 0;
+            flex: 1
+        }
+
+        .consent-toggle {
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--forest);
+            font-size: 1.1rem;
+            flex-shrink: 0;
+            transition: transform .25s var(--ease)
+        }
+
+        .consent-toggle.open {
+            transform: rotate(180deg)
+        }
+
+        .consent-body {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height .35s var(--ease);
+            margin-top: 0
+        }
+
+        .consent-body.open {
+            max-height: 600px;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(200, 151, 62, .2)
+        }
+
+        .consent-text {
+            font-size: .8rem;
+            color: var(--charcoal);
+            line-height: 1.65;
+            margin: 0;
+            white-space: pre-wrap;
+            word-wrap: break-word
+        }
+
         .form-footer {
             margin-top: 1.8rem;
             display: flex;
@@ -2380,15 +2449,15 @@
                         <div class="fsect">Personal Details</div>
                         <div class="f-row">
                             <div class="f-grp"><label for="fName">
-                                Player Surname
-                                <span class="req">*</span></label><input
-                                    type="text" id="fName" placeholder="e.g. Mary">
+                                    Player Surname
+                                    <span class="req">*</span></label><input type="text" id="fName"
+                                    placeholder="e.g. Mary">
                                 <div class="f-err" id="fNameErr">Please enter your first name.</div>
                             </div>
                             <div class="f-grp"><label for="lName">
-                                Player Other Names
-                                <span class="req">*</span></label><input
-                                    type="text" id="lName" placeholder="e.g. Wanjiku">
+                                    Player Other Names
+                                    <span class="req">*</span></label><input type="text" id="lName"
+                                    placeholder="e.g. Wanjiku">
                                 <div class="f-err" id="lNameErr">Please enter your last name.</div>
                             </div>
                         </div>
@@ -2438,7 +2507,8 @@
                             <div class="f-grp"><label for="fFide">FIDE ID <span
                                         style="color:var(--slate);font-weight:400">(optional)</span></label><input
                                     type="text" id="fFide" placeholder="e.g. 10800000"></div>
-                            <div class="f-grp"><label for="fSec">Section/Category<span class="req">*</span></label><select id="fSec">
+                            <div class="f-grp"><label for="fSec">Section/Category<span
+                                        class="req">*</span></label><select id="fSec">
                                     <option value="">Select Section</option>
                                     <option value="open">Open</option>
                                     <option value="u18">Under 18</option>
@@ -2500,6 +2570,48 @@
                         <div class="f-grp"><label for="fNotes">Special Requirements / Notes</label><textarea id="fNotes"
                                 rows="3" placeholder="Dietary requirements, accessibility needs, questions…"></textarea>
                         </div>
+                        <div class="consent-box">
+                            <div class="consent-header" onclick="toggleConsent()">
+                                <h4 class="consent-title">📸 Photography/Videography Consent</h4>
+                                <span class="consent-toggle" id="consentToggle">▼</span>
+                            </div>
+                            <div class="consent-body" id="consentBody">
+                                <p class="consent-text">Consent for Photography/Videography during the Chess Tournament
+
+                                    We are committed to ensuring the privacy and data protection rights of individuals
+                                    in accordance with the Kenya Data Protection Act 2019, particularly Regulation 20
+                                    and 21 concerning the processing of personal data for visual and audio purposes.
+
+                                    During the chess tournament held at Verona Hotel, we may engage in photography and
+                                    videography activities to capture the event's essence and promote scholastic
+                                    achievements. This documentation may include images and footage of participants,
+                                    audience, and other individuals present at the event. By participating in this
+                                    tournament, you acknowledge and consent to the following:
+
+                                    Consent for Photography/videography: You consent to the capturing of your image
+                                    and/or voice during the event.
+
+                                    Purpose of Capture: The captured visuals and audio will be used for promotional and
+                                    educational purposes, showcasing the event's success and fostering chess enthusiasm
+                                    within the school and broader community.
+
+                                    No Commercial Use: The captured materials will not be used for any commercial
+                                    purposes, nor will they be sold or transferred to third parties for monetary gain.
+
+                                    Withdrawal of Consent: You have the right to withdraw your consent at any time by
+                                    notifying the event organizer in writing (globaloutreach@thegiftofchess.org)
+
+                                    Your participation in the chess tournament implies your understanding and acceptance
+                                    of the terms outlined in this consent statement. If you have any questions or
+                                    concerns regarding the use of visual and audio materials, please contact us prior to
+                                    the event.</p>
+                            </div>
+                        </div>
+                        <div class="f-check"><input type="checkbox" id="fConsent"><label for="fConsent">I consent to
+                                photography and videography during the tournament as outlined above. <span
+                                    class="req">*</span></label></div>
+                        <div class="f-err" id="fConsentErr" style="margin-left:1.55rem">You must consent to
+                            photography/videography.</div>
                         <div class="f-check"><input type="checkbox" id="fTerms"><label for="fTerms">I agree to the
                                 tournament regulations and code of conduct. <span class="req">*</span></label></div>
                         <div class="f-err" id="fTermsErr" style="margin-left:1.55rem">You must agree to the terms.</div>
@@ -2709,6 +2821,12 @@
             document.querySelectorAll('.f-grp input.err,.f-grp select.err').forEach(e => e.classList.remove('err'));
             document.querySelectorAll('.f-err.show').forEach(e => e.classList.remove('show'));
         }
+        function toggleConsent() {
+            const body = document.getElementById('consentBody');
+            const toggle = document.getElementById('consentToggle');
+            body.classList.toggle('open');
+            toggle.classList.toggle('open');
+        }
         function validate() {
             clearE(); let ok = true;
             if (!sv('fName')) { se('fName', 'fNameErr'); ok = false }
@@ -2723,6 +2841,7 @@
             if (!sv('fTour')) { se('fTour', 'fTourErr'); ok = false }
             if (!sv('fSec')) { se('fSec', 'fSecErr'); ok = false }
             if (!sv('fPay')) { se('fPay', 'fPayErr'); ok = false }
+            if (!document.getElementById('fConsent').checked) { document.getElementById('fConsentErr').classList.add('show'); ok = false }
             if (!document.getElementById('fTerms').checked) { document.getElementById('fTermsErr').classList.add('show'); ok = false }
             return ok;
         }
