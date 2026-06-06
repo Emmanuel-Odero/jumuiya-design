@@ -9,31 +9,37 @@
         content="Jumuiya Chess — Kenya's premier chess community. Tournaments, training, and a thriving community of minds.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link
-        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@400;500;600&family=DM+Mono:wght@400;500&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600;1,700&family=Outfit:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap"
         rel="stylesheet">
     <style>
         /* ─── TOKENS ─────────────────────────────────────────── */
         :root {
-            --ink: #0d1a14;
-            --forest: #163827;
-            --fmid: #1e5038;
-            --gold: #c8973e;
-            --gold-pale: #f0d99a;
-            --gold-wash: #fdf8ed;
-            --sand: #f5efe3;
-            --cream: #faf8f3;
+            /* Jumuiya palette — warm terracotta + deep teal + parchment */
+            --ink: #1a1008;
+            --teal: #0e3d3a;
+            --teal-mid: #155954;
+            --teal-lt: #1d736d;
+            --terra: #c0512a;
+            --terra-lt: #d9703f;
+            --gold: #d4952b;
+            --gold-pale: #f3dea0;
+            --gold-wash: #fdf6e4;
+            --parch: #faf5ed;
+            --parch-dk: #f2ead8;
             --white: #fff;
-            --mist: #e8e3d8;
-            --slate: #6b6558;
-            --charcoal: #2e3027;
-            --fd: 'Playfair Display', Georgia, serif;
-            --fb: 'DM Sans', system-ui, sans-serif;
+            --bone: #e8dfc8;
+            --slate: #5c5040;
+            --charcoal: #2a1f12;
+            /* typography */
+            --fd: 'Cormorant Garamond', Georgia, serif;
+            --fb: 'Outfit', system-ui, sans-serif;
             --fm: 'DM Mono', monospace;
+            /* layout */
             --nav-h: 60px;
-            --r-sm: 8px;
-            --r-md: 14px;
-            --r-lg: 20px;
-            --r-xl: 28px;
+            --r-sm: 6px;
+            --r-md: 12px;
+            --r-lg: 18px;
+            --r-xl: 24px;
             --sh-sm: 0 1px 4px rgba(0, 0, 0, .08);
             --sh-md: 0 6px 20px rgba(0, 0, 0, .11);
             --sh-lg: 0 16px 48px rgba(0, 0, 0, .15);
@@ -58,7 +64,7 @@
 
         body {
             font-family: var(--fb);
-            background: var(--cream);
+            background: var(--parch);
             color: var(--charcoal);
             line-height: 1.7;
             -webkit-font-smoothing: antialiased;
@@ -116,25 +122,25 @@
         }
 
         .btn--gold {
-            background: var(--gold);
-            color: var(--ink);
-            border-color: var(--gold)
+            background: var(--terra);
+            color: var(--white);
+            border-color: var(--terra)
         }
 
         .btn--gold:hover {
-            background: #b8842e;
-            border-color: #b8842e;
+            background: var(--terra-lt);
+            border-color: var(--terra-lt);
             transform: translateY(-1px);
             box-shadow: var(--sh-md)
         }
 
         .btn--forest {
-            background: var(--forest);
+            background: var(--teal);
             color: var(--white)
         }
 
         .btn--forest:hover {
-            background: var(--fmid);
+            background: var(--teal-mid);
             transform: translateY(-1px);
             box-shadow: var(--sh-md)
         }
@@ -152,12 +158,12 @@
 
         .btn--outline {
             background: transparent;
-            color: var(--forest);
-            border-color: var(--forest)
+            color: var(--teal);
+            border-color: var(--teal)
         }
 
         .btn--outline:hover {
-            background: var(--forest);
+            background: var(--teal);
             color: var(--white)
         }
 
@@ -179,12 +185,12 @@
 
         /* ─── ANNOUNCEMENT ────────────────────────────────────── */
         .announce {
-            background: var(--forest);
-            color: rgba(255, 255, 255, .9);
+            background: var(--terra);
+            color: rgba(255, 255, 255, .95);
             text-align: center;
             font-size: .78rem;
             font-weight: 500;
-            padding: .48rem 1rem;
+            padding: .5rem 1rem;
             letter-spacing: .02em;
             line-height: 1.5
         }
@@ -200,15 +206,15 @@
             top: 0;
             z-index: 900;
             height: var(--nav-h);
-            background: rgba(253, 248, 237, .96);
+            background: rgba(250, 245, 237, .97);
             backdrop-filter: blur(18px);
             -webkit-backdrop-filter: blur(18px);
-            border-bottom: 1px solid var(--mist);
+            border-bottom: 2px solid var(--bone);
             transition: box-shadow .3s var(--ease)
         }
 
         .nav.scrolled {
-            box-shadow: var(--sh-sm)
+            box-shadow: 0 2px 16px rgba(26, 16, 8, .10)
         }
 
         .nav__inner {
@@ -226,21 +232,16 @@
             align-items: center;
             gap: .55rem;
             font-family: var(--fd);
-            font-size: 1.15rem;
+            font-size: 1.3rem;
             font-weight: 700;
-            color: var(--ink)
+            color: var(--ink);
+            letter-spacing: -.01em
         }
 
-        .nav__logo-mark {
-            width: 34px;
-            height: 34px;
-            border-radius: var(--r-sm);
-            background: var(--ink);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--gold);
-            font-size: 1.1rem;
+        .nav__logo-img {
+            height: 36px;
+            width: auto;
+            display: block;
             flex-shrink: 0
         }
 
@@ -253,32 +254,34 @@
 
         .nav__links a {
             display: block;
-            padding: .45rem .8rem;
-            font-size: .83rem;
-            font-weight: 500;
-            color: var(--charcoal);
+            padding: .45rem .85rem;
+            font-size: .82rem;
+            font-weight: 600;
+            color: var(--slate);
             border-radius: var(--r-sm);
-            transition: all .18s
+            transition: all .18s;
+            letter-spacing: .02em;
+            text-transform: uppercase
         }
 
         .nav__links a:hover,
         .nav__links a.active {
-            color: var(--forest);
-            background: rgba(22, 56, 39, .07)
+            color: var(--teal);
+            background: rgba(14, 61, 58, .07)
         }
 
         .nav__links .nav-cta {
-            background: var(--gold);
-            color: var(--ink);
-            font-weight: 600;
-            margin-left: .35rem;
-            padding: .45rem 1.1rem;
+            background: var(--terra);
+            color: var(--white);
+            font-weight: 700;
+            margin-left: .5rem;
+            padding: .45rem 1.2rem;
             border-radius: var(--r-sm)
         }
 
         .nav__links .nav-cta:hover {
-            background: #b8842e;
-            color: var(--ink)
+            background: var(--terra-lt);
+            color: var(--white)
         }
 
         .nav__burger {
@@ -318,7 +321,7 @@
             position: fixed;
             inset: 0;
             z-index: 800;
-            background: var(--ink);
+            background: var(--teal);
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -347,13 +350,13 @@
         }
 
         .nav__drawer a:hover {
-            color: var(--gold)
+            color: var(--gold-pale)
         }
 
         .nav__drawer .drawer-cta {
             margin-top: 1.2rem;
-            background: var(--gold);
-            color: var(--ink);
+            background: var(--terra);
+            color: var(--white);
             font-family: var(--fb);
             font-size: .95rem;
             font-weight: 700;
@@ -364,19 +367,35 @@
         /* ─── HERO ─────────────────────────────────────────────── */
         .hero {
             position: relative;
-            background: var(--ink);
+            background: var(--teal);
             min-height: calc(100svh - var(--nav-h));
             display: flex;
             align-items: center;
             overflow: hidden
         }
 
+        /* Kente-inspired stripe accent at top of hero */
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: repeating-linear-gradient(90deg,
+                    var(--terra) 0, var(--terra) 20px,
+                    var(--gold) 20px, var(--gold) 40px,
+                    var(--teal-lt) 40px, var(--teal-lt) 60px,
+                    var(--gold) 60px, var(--gold) 80px);
+            z-index: 5
+        }
+
         .hero__board {
             position: absolute;
             inset: 0;
             z-index: 0;
-            background-image: repeating-conic-gradient(rgba(255, 255, 255, .022) 0% 25%, transparent 0% 50%);
-            background-size: 52px 52px
+            background-image: repeating-conic-gradient(rgba(255, 255, 255, .028) 0% 25%, transparent 0% 50%);
+            background-size: 56px 56px
         }
 
         .hero__media {
@@ -390,15 +409,15 @@
             height: 100%;
             object-fit: cover;
             object-position: center 30%;
-            opacity: .4;
-            filter: saturate(.55)
+            opacity: .32;
+            filter: saturate(.45) sepia(.15)
         }
 
         .hero__overlay {
             position: absolute;
             inset: 0;
             z-index: 1;
-            background: linear-gradient(110deg, rgba(13, 26, 20, .97) 0%, rgba(13, 26, 20, .82) 50%, rgba(13, 26, 20, .3) 100%)
+            background: linear-gradient(115deg, rgba(14, 61, 58, .97) 0%, rgba(14, 61, 58, .84) 48%, rgba(14, 61, 58, .25) 100%)
         }
 
         .hero__inner {
@@ -415,14 +434,14 @@
             display: inline-flex;
             align-items: center;
             gap: .5rem;
-            background: rgba(200, 151, 62, .14);
-            border: 1px solid rgba(200, 151, 62, .32);
+            background: rgba(212, 149, 43, .16);
+            border: 1px solid rgba(212, 149, 43, .38);
             color: var(--gold-pale);
             font-size: .72rem;
             font-weight: 600;
-            letter-spacing: .1em;
+            letter-spacing: .12em;
             text-transform: uppercase;
-            padding: .34rem .85rem;
+            padding: .34rem .9rem;
             border-radius: 50px;
             margin-bottom: 1rem
         }
@@ -451,14 +470,15 @@
 
         .hero__title {
             color: var(--white);
-            font-size: clamp(2.4rem, 4.8vw, 4.4rem);
-            font-weight: 900;
-            line-height: 1.06;
-            margin-bottom: 1.2rem
+            font-size: clamp(2.6rem, 5vw, 5rem);
+            font-weight: 700;
+            line-height: 1.04;
+            margin-bottom: 1.2rem;
+            letter-spacing: -.02em
         }
 
         .hero__title em {
-            color: var(--gold);
+            color: var(--gold-pale);
             font-style: italic
         }
 
@@ -467,7 +487,7 @@
             font-size: clamp(.9rem, 1.5vw, 1.08rem);
             max-width: 480px;
             margin-bottom: 2rem;
-            line-height: 1.65
+            line-height: 1.7
         }
 
         .hero__actions {
@@ -482,14 +502,14 @@
             flex-wrap: wrap;
             gap: 2rem;
             padding-top: 1.8rem;
-            border-top: 1px solid rgba(255, 255, 255, .12)
+            border-top: 1px solid rgba(255, 255, 255, .14)
         }
 
         .hero__stat-num {
             font-family: var(--fd);
-            font-size: 1.85rem;
-            font-weight: 900;
-            color: var(--gold);
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--gold-pale);
             line-height: 1
         }
 
@@ -497,7 +517,7 @@
             font-size: .7rem;
             font-weight: 600;
             text-transform: uppercase;
-            letter-spacing: .08em;
+            letter-spacing: .09em;
             color: rgba(255, 255, 255, .4);
             margin-top: .2rem
         }
@@ -524,7 +544,7 @@
             top: 0;
             left: 20px;
             transform: rotate(-3deg);
-            border: 3px solid rgba(200, 151, 62, .35)
+            border: 3px solid rgba(212, 149, 43, .4)
         }
 
         .hero__card-2 {
@@ -533,7 +553,7 @@
             bottom: 0;
             right: 0;
             transform: rotate(4deg);
-            border: 3px solid rgba(255, 255, 255, .08);
+            border: 3px solid rgba(255, 255, 255, .1);
             z-index: 2
         }
 
@@ -559,8 +579,8 @@
         .hero__badge-num {
             font-family: var(--fd);
             font-size: 1.4rem;
-            font-weight: 900;
-            color: var(--forest);
+            font-weight: 700;
+            color: var(--teal);
             line-height: 1
         }
 
@@ -573,13 +593,16 @@
 
         /* ─── TRUST / INTEREST ────────────────────────────────── */
         .trust {
-            background: var(--forest);
-            padding: 2.5rem 0
+            background: var(--terra);
+            padding: 3rem 0 3.5rem;
+            position: relative;
+            clip-path: polygon(0 0, 100% 0, 100% calc(100% - 28px), 0 100%);
+            margin-bottom: -1px
         }
 
         .trust__inner {
             display: grid;
-            grid-template-columns: 220px 1fr;
+            grid-template-columns: 200px 1fr;
             gap: 2.5rem;
             align-items: center
         }
@@ -587,31 +610,35 @@
         .trust__heading {
             font-family: var(--fd);
             font-size: clamp(1.5rem, 2.5vw, 2rem);
-            font-weight: 900;
+            font-weight: 700;
             color: var(--white);
             line-height: 1.2
         }
 
         .trust__heading em {
-            color: var(--gold);
-            font-style: normal
+            color: var(--gold-pale);
+            font-style: italic
         }
 
         .trust__stats {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(4, 1fr);
             gap: 1rem
         }
 
         .trust__stat {
-            text-align: center
+            text-align: center;
+            padding: 1rem;
+            background: rgba(255, 255, 255, .12);
+            border-radius: var(--r-md);
+            border: 1px solid rgba(255, 255, 255, .18)
         }
 
         .trust__stat-num {
             font-family: var(--fd);
-            font-size: clamp(1.8rem, 2.5vw, 2.4rem);
-            font-weight: 900;
-            color: var(--gold);
+            font-size: clamp(1.8rem, 2.5vw, 2.6rem);
+            font-weight: 700;
+            color: var(--white);
             line-height: 1;
             display: block
         }
@@ -621,15 +648,15 @@
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: .08em;
-            color: rgba(255, 255, 255, .45);
+            color: rgba(255, 255, 255, .65);
             display: block;
-            margin-top: .25rem
+            margin-top: .3rem
         }
 
         .interest {
-            background: var(--forest);
+            background: var(--terra);
             padding-bottom: 2.5rem;
-            border-bottom: 3px solid rgba(200, 151, 62, .25)
+            border-bottom: 3px solid rgba(212, 149, 43, .3)
         }
 
         .interest__card {
@@ -653,7 +680,7 @@
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 0;
-            border: 2px solid var(--mist);
+            border: 2px solid var(--bone);
             border-radius: var(--r-sm);
             overflow: hidden;
             margin-bottom: 1rem
@@ -681,11 +708,11 @@
         .interest__email-input {
             width: 100%;
             padding: .7rem .95rem;
-            border: 2px solid var(--mist);
+            border: 2px solid var(--bone);
             border-radius: var(--r-sm);
             font-family: var(--fb);
             font-size: .9rem;
-            background: var(--sand);
+            background: var(--parch-dk);
             color: var(--ink);
             transition: border .2s;
             margin-bottom: .9rem;
@@ -702,7 +729,7 @@
         .interest__sel:focus,
         .interest__email-input:focus {
             outline: none;
-            border-color: var(--forest);
+            border-color: var(--teal);
             background: var(--white)
         }
 
@@ -740,7 +767,7 @@
         }
 
         .section--sand {
-            background: var(--sand)
+            background: var(--parch-dk)
         }
 
         .section--white {
@@ -753,8 +780,8 @@
             font-size: .72rem;
             font-weight: 500;
             text-transform: uppercase;
-            letter-spacing: .12em;
-            color: var(--gold);
+            letter-spacing: .14em;
+            color: var(--terra);
             margin-bottom: .8rem
         }
 
@@ -784,7 +811,7 @@
             width: 44px;
             height: 3px;
             border-radius: 2px;
-            background: var(--gold);
+            background: var(--terra);
             margin: .8rem 0 .9rem
         }
 
@@ -839,13 +866,13 @@
             position: absolute;
             top: -20px;
             left: -16px;
-            background: var(--gold);
-            color: var(--ink);
+            background: var(--terra);
+            color: var(--white);
             border-radius: var(--r-md);
             padding: .9rem 1.1rem;
             box-shadow: var(--sh-lg);
             font-family: var(--fd);
-            font-weight: 900;
+            font-weight: 700;
             font-size: 2.2rem;
             line-height: 1
         }
@@ -868,10 +895,10 @@
         }
 
         .about__pillar {
-            background: var(--sand);
+            background: var(--parch-dk);
             border-radius: var(--r-md);
             padding: 1.1rem;
-            border-left: 3px solid var(--gold)
+            border-left: 3px solid var(--teal-lt)
         }
 
         .about__pillar-icon {
@@ -892,6 +919,37 @@
             margin: 0
         }
 
+        /* Partner logo strip */
+        .partner-strip {
+            display: flex;
+            align-items: center;
+            gap: 1.2rem;
+            margin-top: 1.6rem;
+            padding-top: 1.4rem;
+            border-top: 1px solid var(--bone)
+        }
+
+        .partner-strip__label {
+            font-size: .72rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: .1em;
+            color: var(--slate);
+            white-space: nowrap
+        }
+
+        .partner-logo {
+            height: 36px;
+            width: auto;
+            opacity: .75;
+            filter: grayscale(.3) sepia(.1);
+            transition: opacity .2s
+        }
+
+        .partner-logo:hover {
+            opacity: 1
+        }
+
         /* ─── WAYS / MOSAIC ───────────────────────────────────── */
         .ways__grid {
             display: grid;
@@ -906,7 +964,7 @@
             overflow: hidden;
             cursor: pointer;
             transition: transform .4s var(--ease), box-shadow .4s;
-            background: var(--forest)
+            background: var(--teal)
         }
 
         .way-card:hover {
@@ -946,7 +1004,7 @@
         .way-card__overlay {
             position: absolute;
             inset: 0;
-            background: linear-gradient(175deg, transparent 20%, rgba(13, 26, 20, .88) 100%)
+            background: linear-gradient(175deg, transparent 20%, rgba(14, 61, 58, .9) 100%)
         }
 
         .way-card__body {
@@ -960,8 +1018,8 @@
 
         .way-card__tag {
             display: inline-block;
-            background: var(--gold);
-            color: var(--ink);
+            background: var(--terra);
+            color: var(--white);
             font-size: .65rem;
             font-weight: 700;
             text-transform: uppercase;
@@ -1020,7 +1078,7 @@
             font-size: .82rem;
             font-weight: 600;
             cursor: pointer;
-            border: 2px solid var(--mist);
+            border: 2px solid var(--bone);
             background: var(--white);
             color: var(--slate);
             font-family: var(--fb);
@@ -1028,13 +1086,13 @@
         }
 
         .t-filter-btn:hover {
-            border-color: var(--gold);
-            color: var(--ink)
+            border-color: var(--terra);
+            color: var(--terra)
         }
 
         .t-filter-btn.active {
-            background: var(--ink);
-            border-color: var(--ink);
+            background: var(--teal);
+            border-color: var(--teal);
             color: var(--white)
         }
 
@@ -1047,7 +1105,7 @@
         .t-card {
             background: var(--white);
             border-radius: var(--r-lg);
-            border: 1px solid var(--mist);
+            border: 1px solid var(--bone);
             overflow: hidden;
             transition: all .3s var(--ease);
             display: flex;
@@ -1057,7 +1115,7 @@
         .t-card:hover {
             box-shadow: var(--sh-lg);
             transform: translateY(-3px);
-            border-color: var(--gold)
+            border-color: var(--terra)
         }
 
         .t-card__stripe {
@@ -1065,7 +1123,7 @@
         }
 
         .stripe-open {
-            background: linear-gradient(90deg, #059669, #10b981)
+            background: linear-gradient(90deg, var(--teal-lt), var(--teal))
         }
 
         .stripe-soon {
@@ -1073,7 +1131,7 @@
         }
 
         .stripe-weekly {
-            background: linear-gradient(90deg, #2563eb, #60a5fa)
+            background: linear-gradient(90deg, var(--terra), var(--terra-lt))
         }
 
         .t-card__head {
@@ -1142,7 +1200,7 @@
             align-items: center;
             gap: .35rem;
             background: var(--gold-wash);
-            color: var(--forest);
+            color: var(--teal);
             font-weight: 700;
             font-size: .76rem;
             padding: .28rem .65rem;
@@ -1167,7 +1225,7 @@
         }
 
         .reg-sidebar {
-            background: var(--ink);
+            background: var(--teal);
             border-radius: var(--r-xl);
             padding: 2rem;
             position: sticky;
@@ -1229,7 +1287,7 @@
             background: var(--white);
             border-radius: var(--r-xl);
             padding: 2.2rem;
-            border: 1px solid var(--mist);
+            border: 1px solid var(--bone);
             box-shadow: var(--sh-md)
         }
 
@@ -1250,7 +1308,7 @@
             text-transform: uppercase;
             letter-spacing: .1em;
             color: var(--slate);
-            border-bottom: 1px solid var(--mist);
+            border-bottom: 1px solid var(--bone);
             padding-bottom: .45rem;
             margin: 1.4rem 0 1rem;
             font-family: var(--fm)
@@ -1284,11 +1342,11 @@
         .f-grp textarea {
             width: 100%;
             padding: .66rem .9rem;
-            border: 1.5px solid var(--mist);
+            border: 1.5px solid var(--bone);
             border-radius: var(--r-sm);
             font-family: var(--fb);
             font-size: .88rem;
-            background: var(--sand);
+            background: var(--parch-dk);
             color: var(--ink);
             transition: border .18s, box-shadow .18s, background .18s;
             appearance: none
@@ -1337,7 +1395,7 @@
             width: 17px;
             height: 17px;
             flex-shrink: 0;
-            accent-color: var(--forest);
+            accent-color: var(--teal);
             margin-top: 3px;
             cursor: pointer
         }
@@ -1373,7 +1431,7 @@
         .consent-title {
             font-size: .88rem;
             font-weight: 700;
-            color: var(--forest);
+            color: var(--teal);
             margin: 0;
             flex: 1
         }
@@ -1384,7 +1442,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            color: var(--forest);
+            color: var(--teal);
             font-size: 1.1rem;
             flex-shrink: 0;
             transition: transform .25s var(--ease)
@@ -1454,7 +1512,7 @@
         .news-card {
             background: var(--white);
             border-radius: var(--r-lg);
-            border: 1px solid var(--mist);
+            border: 1px solid var(--bone);
             overflow: hidden;
             transition: all .3s;
             display: flex;
@@ -1468,7 +1526,7 @@
 
         .news-card__img {
             aspect-ratio: 16/9;
-            background: var(--fmid);
+            background: var(--teal-mid);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -1501,7 +1559,7 @@
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: .08em;
-            color: var(--gold);
+            color: var(--terra);
             margin-bottom: .28rem;
             font-family: var(--fm)
         }
@@ -1524,28 +1582,30 @@
             gap: .32rem;
             font-size: .78rem;
             font-weight: 600;
-            color: var(--forest);
+            color: var(--teal);
             margin-top: .7rem;
             transition: gap .2s
         }
 
         .news-card__link:hover {
             gap: .55rem;
-            color: var(--gold)
+            color: var(--terra)
         }
 
         /* ─── CTA BAND ────────────────────────────────────────── */
         .cta-band {
-            background: var(--ink);
+            background: var(--teal);
             position: relative;
             overflow: hidden;
-            padding: 4.5rem 0
+            padding: 4.5rem 0;
+            /* inverted diagonal from trust section */
+            clip-path: polygon(0 28px, 100% 0, 100% 100%, 0 100%)
         }
 
         .cta-band__board {
             position: absolute;
             inset: 0;
-            background-image: repeating-conic-gradient(rgba(255, 255, 255, .018) 0% 25%, transparent 0% 50%);
+            background-image: repeating-conic-gradient(rgba(255, 255, 255, .02) 0% 25%, transparent 0% 50%);
             background-size: 56px 56px
         }
 
@@ -1554,7 +1614,7 @@
             width: 600px;
             height: 400px;
             border-radius: 50%;
-            background: radial-gradient(ellipse, rgba(200, 151, 62, .11) 0%, transparent 70%);
+            background: radial-gradient(ellipse, rgba(212, 149, 43, .14) 0%, transparent 70%);
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
@@ -1574,12 +1634,12 @@
         }
 
         .cta-band__title em {
-            color: var(--gold);
+            color: var(--gold-pale);
             font-style: italic
         }
 
         .cta-band__sub {
-            color: rgba(255, 255, 255, .5);
+            color: rgba(255, 255, 255, .6);
             max-width: 480px;
             margin: 0 auto 1.8rem;
             font-size: 1rem
@@ -1594,7 +1654,7 @@
 
         /* ─── FOOTER ──────────────────────────────────────────── */
         .footer {
-            background: var(--charcoal);
+            background: var(--ink);
             color: rgba(255, 255, 255, .5);
             padding: 3.5rem 0 1.6rem
         }
@@ -1609,24 +1669,19 @@
         .footer__brand {
             font-family: var(--fd);
             font-size: 1.35rem;
-            font-weight: 900;
+            font-weight: 700;
             color: var(--white);
             display: flex;
             align-items: center;
-            gap: .45rem;
+            gap: .55rem;
             margin-bottom: .5rem
         }
 
-        .footer__brand-mark {
-            width: 30px;
-            height: 30px;
-            border-radius: var(--r-sm);
-            background: var(--gold);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--ink);
-            font-size: 1rem
+        .footer__brand-logo {
+            height: 32px;
+            width: auto;
+            opacity: .85;
+            flex-shrink: 0
         }
 
         .footer__desc {
@@ -1680,8 +1735,8 @@
         }
 
         .footer__social a:hover {
-            background: var(--gold);
-            color: var(--ink)
+            background: var(--terra);
+            color: var(--white)
         }
 
         .footer__bottom {
@@ -1704,7 +1759,7 @@
             width: 42px;
             height: 42px;
             border-radius: 50%;
-            background: var(--forest);
+            background: var(--teal);
             color: var(--white);
             border: none;
             cursor: pointer;
@@ -1834,7 +1889,7 @@
             }
 
             .trust__stats {
-                grid-template-columns: repeat(3, 1fr)
+                grid-template-columns: repeat(2, 1fr)
             }
 
             .about__grid {
@@ -1987,7 +2042,7 @@
             }
 
             .trust__stats {
-                grid-template-columns: repeat(3, 1fr);
+                grid-template-columns: repeat(2, 1fr);
                 gap: .6rem
             }
 
@@ -2151,7 +2206,7 @@
     <nav class="nav" id="nav">
         <div class="nav__inner">
             <a href="#home" class="nav__logo">
-                <span class="nav__logo-mark">♞</span>
+                <img src="Gift_of_Chess_Logo-01.svg" alt="Jumuiya Chess" class="nav__logo-img">
                 <span class="nav__logo-text">Jumuiya Chess</span>
             </a>
             <ul class="nav__links" id="navLinks">
@@ -2231,19 +2286,23 @@
     <section class="trust">
         <div class="container">
             <div class="trust__inner reveal">
-                <div class="trust__heading">Trusted by<br><em>Thousands</em></div>
+                <div class="trust__heading">Reaching<br><em>Beyond Borders</em></div>
                 <div class="trust__stats">
                     <div class="trust__stat">
+                        <span class="trust__stat-num">6+</span>
+                        <span class="trust__stat-lbl">Countries Reached</span>
+                    </div>
+                    <div class="trust__stat">
+                        <span class="trust__stat-num">17</span>
+                        <span class="trust__stat-lbl">Kenyan Counties</span>
+                    </div>
+                    <div class="trust__stat">
+                        <span class="trust__stat-num">47+</span>
+                        <span class="trust__stat-lbl">Schools Reached</span>
+                    </div>
+                    <div class="trust__stat">
                         <span class="trust__stat-num">1,500+</span>
-                        <span class="trust__stat-lbl">Members</span>
-                    </div>
-                    <div class="trust__stat">
-                        <span class="trust__stat-num">2,500+</span>
-                        <span class="trust__stat-lbl">Weekly Students</span>
-                    </div>
-                    <div class="trust__stat">
-                        <span class="trust__stat-num">10,000+</span>
-                        <span class="trust__stat-lbl">Community Impact</span>
+                        <span class="trust__stat-lbl">Registered Members</span>
                     </div>
                 </div>
             </div>
@@ -2326,6 +2385,10 @@
                             <p>Connecting players across East Africa</p>
                         </div>
                     </div>
+                    <div class="partner-strip">
+                        <span class="partner-strip__label">In partnership with</span>
+                        <img src="Gift_of_Chess_Logo-01.svg" alt="The Gift of Chess" class="partner-logo">
+                    </div>
                 </div>
             </div>
         </div>
@@ -2381,7 +2444,7 @@
                         <a href="#" class="way-card__arrow">Join Community →</a>
                     </div>
                 </div>
-                <div class="way-card reveal rd2" style="background:linear-gradient(135deg,#1e5038,#0d1a14)">
+                <div class="way-card reveal rd2" style="background:linear-gradient(135deg,var(--teal-mid),var(--teal))">
                     <div class="way-card__overlay"
                         style="background:linear-gradient(175deg,transparent 10%,rgba(13,26,20,.7) 100%)"></div>
                     <div class="way-card__body">
@@ -2656,7 +2719,10 @@
         <div class="container">
             <div class="footer__grid">
                 <div>
-                    <div class="footer__brand"><span class="footer__brand-mark">♞</span>Jumuiya Chess</div>
+                    <div class="footer__brand">
+                        <img src="Gift_of_Chess_Logo-01.svg" alt="Jumuiya Chess" class="footer__brand-logo">
+                        Jumuiya Chess
+                    </div>
                     <p class="footer__desc">Kenya's premier chess community — building minds, one move at a time.</p>
                     <div class="footer__social">
                         <a href="#" title="Facebook">f</a><a href="#" title="Twitter">𝕏</a>
